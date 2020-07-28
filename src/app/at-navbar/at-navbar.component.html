@@ -1,0 +1,8 @@
+  <nav class="navbar navbar-expand-md justify-content-center">
+    <ul class="navbar-nav" *ngFor="let item of navBarHeaders">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/{{item}}" routerLinkActive="active">{{item | titlecase }}</a>
+      </li>
+    </ul>
+  </nav>
+
