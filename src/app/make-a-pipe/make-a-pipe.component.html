@@ -1,0 +1,60 @@
+<div class="text-center">
+    <h2>
+        How to make a custome pipe
+    </h2>
+</div>
+<br>
+<div class="d-flex justify-content-center">
+    <ol>
+        <li>
+            Generate the pipe
+            <ul>
+                <li> In the console type: <br>
+                    <b>ng g p &lt; pipename &gt;</b></li>
+            </ul>
+        </li>
+        <li>
+            Add the pipe logic
+            <ul>
+               <li> In the <b>&lt;pipe-name&gt;.pipe.ts</b> file there is a transfrom attribute add the logic there</li>
+               <li>The pipe can have 0 -&gt; n arguments</li>
+            </ul>
+            
+        </li>
+        <li>
+            Add the imports
+            <ul>
+                In the <b>app.module.ts</b> file make sure the pipe is in the imports and the declorations
+             </ul>
+        </li>
+        <li>
+            Use the pipe in the corresponding html file
+            <ul>
+                <li>To use the pipe you interpolate it and input the arguments</li>
+                <li ngNonBindable> {{'&lt;input-vale&gt;' | &lt;pipe-name&gt; : &lt;argument-value1&gt; : ... : &lt;argument-valueN&gt;}} </li>
+             </ul>
+        </li>
+    </ol>
+</div>
+<br>
+
+<div class="d-flex justify-content-center">
+    <div>
+        <h5>Custom pipe file</h5> <br>
+        @Pipe{{ '(' }}{{ '{' }} name: 'textFormater'{{ '}' }}{{ ')' }}<br>
+        export class TextFormaterPipe implements PipeTransform {{ '{' }}<br>
+        <span class="tb">  transform{{ '(' }}value: string , appendValue: string{{ '}' }}: string {{ '{' }}<br></span>
+        <span class="dbltb">    let newStr: string = value;<br> </span>
+        <span class="dbltb">   newStr +=appendValue;<br></span>
+        <span class="dbltb">    return newStr;<br></span>
+        <span class="tb">    {{ '}' }}<br></span>
+        {{ '}' }}
+    </div>
+</div>
+<br><br><br>
+<div class="d-flex justify-content-center">
+    <div>
+        <h5>How to use the pipe</h5> <br>
+        <span ngNonBindable> {{'hello' | textFormater : ' world'}}</span> : {{ 'hello' | textFormater : ' world'}}
+    </div>
+</div>

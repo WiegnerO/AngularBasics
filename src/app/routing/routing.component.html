@@ -1,0 +1,26 @@
+<div class="text-center">
+    <h1>app-routing.module.ts File</h1>
+</div>
+<br>
+<div class="d-flex justify-content-center">
+    <div>
+        import {{ '{' }} NgModule {{ '}' }} from '@angular/core';<br>
+        import {{ '{' }}  Routes, RouterModule {{ '}' }} from '@angular/router';<br>
+        import {{ '{' }}  ArchitectureComponent {{ '}' }} from './architecture/architecture.component'<br>
+        import {{ '{' }}  InterpolationComponent {{ '}' }} from './interpolation/interpolation.component'<br>
+        import {{ '{' }}  MakeAPipeComponent {{ '}' }} from './make-a-pipe/make-a-pipe.component'<br>
+        const routes: Routes = [<br>
+        <span class="tb">{{ '{' }}path : '', redirectTo : '/architecture', pathMatch : 'full'{{ '}' }},<br></span> 
+        <span class="tb">{{ '{' }}path : 'architecture' , component : ArchitectureComponent{{ '}' }}, <br></span>
+        <span class="tb">{{ '{' }}path : 'appmodule' , component : AtAppModuleComponent{{ '}' }}, <br></span>
+        <span class="tb">{{ '{' }}path : 'interpolation' , component : InterpolationComponent{{ '}' }},<br></span>
+        <span class="tb">{{ '{' }}path : 'pipes' , component : MakeAPipeComponent{{ '}' }}<br></span>
+        ];<br>
+        <br>
+        @NgModule({{ '{' }}<br>
+        <span class="tb">imports: [RouterModule.forRoot(routes)],<br></span>
+        <span class="tb">exports: [RouterModule]<br></span>
+        {{ '}' }})<br>
+        export class AppRoutingModule {{ '{' }} {{ '}' }}
+    </div>
+</div>

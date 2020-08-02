@@ -1,0 +1,113 @@
+<div class="text-center">
+    <h2>app.module.ts</h2>
+</div>
+<br>
+<div class="d-flex justify-content-center">
+    <div>
+        The app.module.ts file consists of three sections:
+        <b>
+            <li>imports</li>
+            <li>@NgModule directive</li>
+            <li>constructor</li>
+        </b>
+    </div>
+</div>
+    
+<div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-md-5">
+        <h3>imports</h3>
+        <p>
+            The import section will contain an import of the browser module which contains core directives and pipes. <br>
+                <b><span class="tb" >import {{ '{' }}BrowserModule{{ '}' }} from '@angular/platform-browser';</span></b><br>
+            The import section will contain an import of the NgModule Decorator. <br>
+                <b><span class="tb" >import {{ '{' }}NgModule{{ '}' }} from '@angular/core';</span></b><br>
+            The import section will also contain an import of all the components used in the application. <br>
+                <b><span class="tb" >import {{ '{' }}ArchitectureComponent{{ '}' }}  from './architecture/architecture.component';</span></b><br>
+        </p>
+    </div>
+    <div class="col-md-5">
+        <h3>@NgModule</h3>
+        <p>
+            NgModule is a decorator <br>
+            Takes in an object that has standard (meta data) properites to configure the class:<br>
+        </p>
+        <ul>
+            <li>
+                <b>Imports</b>
+                <ul>
+                   <li>Has the exported declarations of other modules available in the current module</li>
+                   <li>These modules can either be supporting modules or custom made modules
+                       <ul>
+                        <li>supporting modules examples are FormsModule, RouterModule, CommonModule</li>
+                       </ul>
+                   </li>
+                </ul>
+            </li>
+            <li>
+                <b>Declarations</b>
+                <ul>
+                    <li>Make directives (including components and pipes) from the current module available to other directives in the current module.</li>
+                    <li>Everyone inside declarations knows each other</li>
+                    <li>
+                         For example:
+                        <ul>
+                            <li>We have a component called UsernameComponent</li>
+                            <li>We have a pipe called toupperPipe</li>
+                            <li>If we want to use the toupperPipe in the UsernameComponent since UsernameComponent knows that the toupperPipe exists from the delcorations array.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <b>Providers</b>
+                <ul>
+                    <li>make services and values known to DI (dependency injection)</li>
+                    <li>They are added to the root scope and they are injected to other services or directives that have them as dependency</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<br>
+<div class="text-center">
+    <h1>app-routing.module.ts File</h1>
+</div>
+<br>
+<div class="d-flex justify-content-center">
+    <div>
+        import {{ '{' }} BrowserModule {{ '}' }} from '@angular/platform-browser';<br>
+        import {{ '{' }} NgModule {{ '}' }} from '@angular/core';<br>
+        import {{ '{' }} AppRoutingModule {{ '}' }} from './app-routing.module';<br>
+        import {{ '{' }} AppComponent {{ '}' }} from './app.component';<br>
+        import {{ '{' }} AtNavbarComponent {{ '}' }} from './at-navbar/at-navbar.component';<br>
+        import {{ '{' }} ArchitectureComponent {{ '}' }}} from './architecture/architecture.component';<br>
+        import {{ '{' }} InterpolationComponent {{ '}' }} from './interpolation/interpolation.component';<br>
+        import {{ '{' }} AtAppModuleComponent {{ '}' }} from './at-app-module/at-app-module.component';<br>
+        import {{ '{' }} MakeAPipeComponent {{ '}' }} from './make-a-pipe/make-a-pipe.component';<br>
+        import {{ '{' }} TextFormaterPipe {{ '}' }} from './text-formater.pipe';<br>
+        import {{ '{' }} RoutingComponent {{ '}' }} from './routing/routing.component';<br>
+        <br>
+        @NgModule({{ '{' }} <br>
+            declarations: [ <br>
+            <span class="tb">AppComponent,</span><br>
+            <span class="tb">AtNavbarComponent,</span><br>
+            <span class="tb">ArchitectureComponent,</span><br>
+            <span class="tb">InterpolationComponent,</span><br>
+            <span class="tb">AtAppModuleComponent,</span><br>
+            <span class="tb">MakeAPipeComponent,</span><br>
+            <span class="tb">TextFormaterPipe,</span><br>
+            <span class="tb">RoutingComponent</span><br>
+            ],<br>
+            imports: [ <br>
+            <span class="tb">BrowserModule,</span><br>
+                <span class="tb">AppRoutingModule</span><br>
+            ],<br>
+            providers: [],<br>
+            bootstrap: [AppComponent]<br>
+            {{ '}' }} )<br>
+          export class AppModule {{ '{' }}  {{ ' }' }} <br>
+    </div>
+
+    
+</div>

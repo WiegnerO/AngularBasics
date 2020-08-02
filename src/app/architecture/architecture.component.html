@@ -1,1 +1,91 @@
 <h1>Architecture</h1>
+<br>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            <h2>Modules</h2>
+            <p>
+                Angular apps are made up of a collection of one or more modules. <br>
+                Uses @Modules decorator<br>
+                Modules are cohesive so they represents a specific feature within the application. <br>
+                Each module is made up of components, directives, pipes, and services<br>
+                Each Angular application has at least one root module known as the : <br> 
+                <b routerLink="/appmodule" routerLinkActive="active" class=" btn-outline-info d-flex justify-content-center
+                "> Appmodule</b><br>
+            </p>
+        </div>
+        <div class="col-md-5">
+            <h2>Components</h2>
+            <p>
+                Components are basically classes that interact with the .html file of the component.<br>
+                Uses @Component decorator<br>
+                A component controls a portion of the view on the browser<br>
+                Each Angular application will have at least one component known as the root component with the name <b>AppComponent</b>
+                Component consists of the following files:
+                <b>
+                    <li>app.component.css</li>
+                    <li>app.component.html</li>
+                    <li>app.component.ts</li>
+                    <li>app.component.spec.ts</li>
+                </b>
+            </p>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            <h2>Directives</h2>
+            <p>
+                Is the same as a component <b>without</b> a template<br>
+                Uses @Directive decorator<br>
+                Is a mechanism of attaching behaviour to elements in the DOM<br>
+                There are two types of directives which are for DOM manipulation:
+            </p>
+            <ol>
+                   <li>
+                       <b>Attribute directives</b>
+                       <ul>
+                           <li>Manipulate the DOM by changing its behavior and appearance such as:</li>
+                           <li>Conditional style to elements</li>
+                           <li>Show or hide elements</li>
+                       </ul>
+                    </li> 
+                    <li>
+                        <b>Structural directives</b>
+                        <ul>
+                            <li>Manipulate the DOM by creating and destroy DOM elements</li>
+                        </ul>
+                     </li> 
+            </ol>
+        </div>
+        <div class="col-md-5">    
+            <h2>Services</h2>
+            <p>
+                Angular services are singleton objects that get instantiated only once during the lifetime of an application.<br>
+                Servces are responsible for sharing data across multiple components, wrtie logic that doesnt require a view, external interactions ie connect to a database<br>
+                You use services via Dependancy injections
+            </p>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            <h2>Pipes</h2>
+            <p>
+                Allow us to tranform the data for the view IT DOES NOT CHANGE THE PROPERTY OF THE ATTRIBUTE <br>
+                A pipe takes in a value or values and then returns a value
+            </p>
+            <b routerLink="/pipes" routerLinkActive="active" class=" btn-outline-info d-flex justify-content-center
+            "> How to create a pipe</b><br>
+        </div>
+        <div class="col-md-5">
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
