@@ -1,1 +1,27 @@
-<h1>Interpolation</h1>
+<div class="text-center">
+    <h1>Interpolation</h1>
+</div>
+<br>
+<div class="d-flex justify-content-center">
+    <div>
+    Within the interpolaion.component.ts file we have a attribute within the InterpolationComponent class called name and we assigned it the value "ori".<br>
+    To get the value of this varibale within the temple we use double curly braces  <span ngNonBindable> {{}} </span> to specify the name property. <br>
+     The syntax of an expression within double curly braces is known as 
+     <b>interpolation</b>
+     <br> Interpolation works by asking angluar to evalute the content within the curly braces and display the value in the browser<br>
+     <b>Can output class values</b><span ngNonBindable> {{name}} : </span>{{name}} <br>
+     <b>Can do aritmetic operations</b> <span ngNonBindable> In between the brackets {{1 + 2}} : </span> {{1 + 2}}<br>
+     <b>Can concatinate strings </b> <span ngNonBindable> {{"welcome " + name}} : </span> {{"welcome " + name}}<br>
+     <b>Can use Javascript properties and methods</b><span ngNonBindable> {{name.length}} :</span> {{name.length}} <br>
+     <span class='dbltb'ngNonBindable> {{name.toUpperCase()}} :</span>{{name.toUpperCase()}} <br>
+     <b>Can use methods defined in the component class</b> 
+     <span ngNonBindable> {{greetUser()}} : </span> {{greetUser()}} <br>
+     <b>Cannot do assignments with interpolation</b> Will display [Parser Error: Bindings cannot contain assignments ...]<br>
+     <b>Cannot access global Javascript variables </b> <span ngNonBindable> {{window.location.href}} : </span> Will display [Property 'window' does not exist on type 'TestComponent ...] <br>
+     <span class='tb'> To get around this you can create a property in the the InterpolationComponen class which links to the url location </span><br> 
+     <span class='tb'>public siteUrl = window.location.href </span>
+     <br>
+     <span class='tb' ngNonBindable> {{siteUrl}} : </span> {{siteUrl}}
+    
+    </div>
+</div>

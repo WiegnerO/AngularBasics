@@ -14,6 +14,7 @@ export class AtNavbarComponent implements OnInit {
   ngOnInit(): void {
     this.navBarHeaders.push('architecture');
     this.navBarHeaders.push('interpolation');
+    this.navBarHeaders.push('binding');
     this.navBarHeaders.push('observables');
     this.navBarHeaders.push('routing');
     this.navBarHeaders.push('services');

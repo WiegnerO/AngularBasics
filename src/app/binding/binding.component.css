@@ -1,0 +1,8 @@
+.text-success{ color: green;}
+.text-special{ font-style: italic;}
+.danger-class{color: red;}
+
+#textboxid
+{
+    width: 400px;
+}

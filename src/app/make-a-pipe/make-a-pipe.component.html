@@ -1,5 +1,40 @@
 <div class="text-center">
     <h2>
+        How to use pipes
+    </h2>
+</div>
+<div class="d-flex justify-content-center">
+    <div>
+        Allow us to tranform the data for the view IT DOES NOT CHANGE THE PROPERTY OF THE ATTRIBUTE<br>
+        <br><span ngNonBindable>{{pipeExample}} </span><span id="t1">{{pipeExample}}</span>
+        <br><span ngNonBindable>{{pipeExample | lowercase}} </span><span id="t1">{{pipeExample | lowercase}}</span>
+        <br><span ngNonBindable>{{pipeExample | uppercase}} </span><span id="t1">{{pipeExample | uppercase}}</span>
+        <br><span ngNonBindable>{{pipeExample | titlecase}} </span><span id="t1">{{pipeExample | titlecase}}</span>
+        <br><b>when a pipe takes arguments you do : (value1) : (value2) .... : (valuen)</b>
+        <br><span ngNonBindable>{{pipeExample | slice:3}} </span><span id="t1">{{pipeExample | slice:3}}</span>
+        <br><span ngNonBindable>{{pipeExample | slice:3 : 9}} </span><span id="t1">{{pipeExample | slice:3 : 9}}</span>
+        <br><b>we have a json pipe which makes a json representation of an object</b>
+        <br><span ngNonBindable>{{person | json}} </span><span id="t1">{{person | json}}</span>
+        <br> <b>we can do number transfermations</b>
+        <br><span ngNonBindable>{{pipeNumberExample}} </span><span id="t1">{{pipeNumberExample}}</span>
+        <br><span ngNonBindable>{{pipeNumberExample | number : '1.2-3'}} </span><span id="t1">{{pipeNumberExample | number : '1.2-3'}}</span>
+        <br><span ngNonBindable>{{pipeNumberExample| number : '2.4-8'}} </span><span id="t1">{{pipeNumberExample| number : '2.4-8'}}</span>
+        <br><span ngNonBindable>{{103.54782| number : '2.4-8'}} </span><span id="t1">{{103.54782| number : '2.4-8'}}</span>
+        <br><span ngNonBindable>{{103.54782| currency }} </span><span id="t1">{{103.54782| currency }}</span>
+        <br><span ngNonBindable>{{103.54782| currency : 'GBP'}} </span><span id="t1">{{103.54782| currency : 'GBP'}}</span>
+        <br> <b>There are date pipelines too</b>
+        <br><span ngNonBindable>{{date}} </span><span id="t1">{{date}}</span>
+        <br><span ngNonBindable>{{date | date : 'short'}} </span><span id="t1">{{date | date : 'short'}}</span>
+        <br><span ngNonBindable>{{date | date : 'medium'}} </span><span id="t1">{{date | date : 'medium'}}</span>
+        <br><span ngNonBindable>{{date | date : 'long'}} </span><span id="t1">{{date | date : 'long'}}</span>
+        <br><span ngNonBindable>{{date | date : 'shortDate'}} </span><span id="t1">{{date | date : 'shortDate'}}</span>
+        <br><span ngNonBindable>{{date | date : 'shortTime'}} </span><span id="t1">{{date | date : 'shortTime'}}</span>
+    </div>
+</div>
+
+
+<div class="text-center">
+    <h2>
         How to make a custome pipe
     </h2>
 </div>

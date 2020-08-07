@@ -1,0 +1,143 @@
+<h1>Binding</h1>
+<br>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-11">
+            <h2>Property Binding</h2>
+            <p>
+                There is a difference between an HTML attirbute and DOM properties (but they look the same)<br>
+                Attributes are defined with HTML, they CANNOT change once initlaize and basically represent the initilized value <br>
+                Properties are defined via DOM, they CAN change once initlaize and basically represent the current value<br>
+                Attributes initlaize DOM properties <br> 
+                When we do property binding we are binding to the DOM property not the HTML attribute <br>
+                In the example below it shows this exact point <br>
+                &lt;input type="text" value = "hello" &gt; is equal to <input type ="text" value = "hello"><br>
+                If there is no input text within the input text box the <b>attribute </b> and <b>value </b> is hello <br>
+                If there is input text within the input text box the <b>attribute </b> =  hello ;  <b>value</b> =  &lt;is the new input text&gt;<br><br>
+                
+                &lt; input [id]="myId" type ="text" value = "hello" &gt; OR <br>
+                <span ngNonBindable> &lt; input id={{myId}} type ="text" value = "hello" &gt;</span>is equal to  
+                <input [id]="myId" type ="text" value = "hello"> <br>
+                The id property of the <b>input</b> element is equal to the assigned property "myId" which has the value 'testID'<br>
+                The problem without the square brackets is it doesnt allow for property Binding for non string elements therefore use the square version<br><br>
+                
+                <b>The only issue with interpolation is that non-string attributes do not render the correct way for example below both when disabled is initilized even is "true" or "false"
+                the value it always true since it evaulates the presence of a string as true rather than what the string states<br></b>
+                &lt; input  disabled="true" [id]="myId" type ="text" value = "hello" &gt; <input disabled="true" [id]="myId" type ="text" value = "hello"> <br>
+                &lt; input  disabled="false" [id]="myId" type ="text" value = "hello" &gt; <input disabled="false" [id]="myId" type ="text" value = "hello"> <br>
+                &lt;input disabled="{{ '{' }}{{ '{' }}false{{ '}' }}{{ '}' }}" [id]="myId" type ="text" value = "hello"&gt; hhhhhhh <input disabled="{{false}}" [id]="myId" type ="text" value = "hello"> <br><br>
+
+                <b>Instead of using double curly braces we use property binding as shown before<br></b>
+                &lt; input [disabled]="false" [id]="myId" type ="text" value = "hello" &gt;<input [disabled]="false" [id]="myId" type ="text" value = "hello"> <br>
+                &lt; input [disabled]="true" [id]="myId" type ="text" value = "hello" &gt;<input [disabled]="true" [id]="myId" type ="text" value = "hello"> <br><br>
+                <b>Instead of using hard coded true or false we use a class var to set it<br></b>
+                &lt; input [disabled]=isDisabledtrue [id]="myId" type ="text" value = "hello" &gt;<input [disabled]=isDisabledtrue [id]="myId" type ="text" value = "hello"> <br>
+                &lt; input [disabled]=isDisabledfalse [id]="myId" type ="text" value = "hello" &gt;<input [disabled]=isDisabledfalse [id]="myId" type ="text" value = "hello"> <br><br>
+                <b>Here we can get rid of the brackets and use bind-&lt;attribute name&gt;<br></b>
+                &lt; input  bind-disabled=isDisabledtrue [id]="myId" type ="text" value = "hello" &gt; <input bind-disabled=isDisabledtrue [id]="myId" type ="text" value = "hello"> <br>
+                &lt; input  bind-disabled=isDisabledfalse [id]="myId" type ="text" value = "hello" &gt; <input bind-disabled=isDisabledfalse [id]="myId" type ="text" value = "hello"> <br><br>         
+            </p>
+            <hr>
+            <h2>Class Binding</h2>
+            <p>
+                <b>Class variables</b>
+            </p>
+                <ul>
+                    <li>public successClass = "text-success";</li>
+                    <li>public hasError = true;</li>
+                    <li>public hasNoError = false;</li>
+                    <li>public highlightColor = "pink";</li>
+                    <li>public messageClasses = {{ '{' }}<br>
+                        <span class="dbltb">"text-success": !this.hasError,</span><br>
+                        <span class="dbltb">"danger-class": this.hasError,</span><br>
+                        <span class="dbltb">"text-special": this.isSpecial</span><br>
+                        {{ '}' }}</li>
+                    <li>  public titleStyles = {{ '{' }}<br>
+                        <span class="dbltb">color : "blue",</span><br>
+                        <span class="dbltb">fontStyle : "italic"</span><br>
+                      {{ '}' }}</li>
+                </ul>
+
+                <b>CSS classes</b>
+                <ul>
+                    <li>.text-success{{ '{' }} color: green; {{ '}' }}</li>
+                    <li>.text-special{{ '{' }} font-style: italic; {{ '}' }}</li>
+                    <li>.danger-class{{ '{' }} color: red; {{ '}' }}</li>
+                </ul>
+            <p>
+                Class binnding is binding of css classes to an element via binding<br>
+                <b>You can pass the element a css class via class attribute<br></b>
+                &lt; span class = "text-success" &gt; hello &lt; /span &gt; will print out <span class = "text-success ">hello</span><br><br>
+                <b>You can pass the element a css class via bindings<br></b>
+                &lt; span [class] = "successClass"&gt; hello &lt; /span &gt; will print out <span [class] = "successClass">hello</span><br><br>
+                <b>If we combine the class binding and class attribute in the same html element it will : <br></b>
+                &lt; span class = "text-special" [class] = "successClass"   &gt; hello &lt; /span &gt; will print out <span class = "text-special" [class] = "successClass"  >hello</span><br><br>
+                <b>To have a conditional statment weather ot not to run the class you can do the following<br></b>
+                <b>Here we will give the class attribute the css class danger-class which will be applied if the hasError attribute value is true</b><br>
+                Since hasError is true then danger-class will be applied<br>
+                &lt; span [class.danger-class] = "hasError"  &gt; hello &lt; /span &gt; will print out <span [class.danger-class]= "hasError"> hello </span> <br>
+                &lt; span [class.danger-class] = "hasNoError"  &gt; hello &lt; /span &gt; will print out<span [class.danger-class]= "hasNoError"> hello </span> <br><br>
+                
+                <b>We bind the messageClasses object to the [ngClass] directive and now angular applies the messageClasses to the element and checks which classes are set to true
+                    <br> therefore danger-class and text-special will be set <br>
+                </b>
+
+                &lt;span [ngClass] = "messageClasses"  &gt; hello &lt; /span &gt; =   <span [ngClass] = "messageClasses">hello</span><br>
+                &lt;span [style.color]= "hasError ? 'red' : 'green' "&gt;This is style binding with conditional&lt;/span&gt;
+                <span [style.color]= "hasError ? 'red' : 'green' ">This is style binding with conditional</span><br>
+                &lt;span [style.color]= "!hasError ? 'red' : 'green' "&gt;This is style binding with conditional&lt;/span&gt;
+                <span [style.color]= "!hasError ? 'red' : 'green' "> This is style binding with conditional</span><br>
+                &lt;span [style.color]= "highlightColor"&gt; This style binding allows us pick a style attribute to change&lt;/span&gt;
+                <span [style.color]= "highlightColor"> This style binding allows us pick a style attribute to change</span><br>
+                &lt;span [ngStyle]="titleStyles"&gt;ng Style directives is a class with multiple style formats&lt;/span&gt;&lt;br&gt;
+                <span [ngStyle]="titleStyles"> ng Style directives is a class with multiple style formats</span><br>
+            </p>
+            <hr>
+            <h2>Event Binding</h2>
+            <p>
+                <b>Class variables and methods</b>
+            </p>
+            <ul>
+                <li>  public greeting = "";</li>
+                <li>  public greetingnew = "";</li>
+                <li>  public greeting2 = "";</li>
+
+            </ul>
+            Event binding allows you to listen for certain events such as keystrokes, mouse movements, clicks, and touches <br>
+            It calls the specified method in the component that is associted witht that particular event <br><br>
+            <b>Here we are binding the the click event of the button the function onClick() and we can see once we click the greeting happens</b><br>
+            <span ngNonBindable> &lt; button (click)="onClick()" &gt; Greet  &lt;/ button  &gt; {{greeting}} </span><br>
+            <button (click)="onClick()" >Greet</button> {{greeting}}<br> <br>
+
+            <b>Here we can pass the event as a parameter for the onClicknew method</b><br>
+            <span ngNonBindable> &lt; button (click)="onClicknew($event)" &gt; Greet  &lt;/ button  &gt; {{greetingnew}} </span><br>
+            <button (click)="onClicknew($event)" >Greet</button> {{greetingnew}}<br><br>
+
+            <b>If the method is small enough we dont need to assign an event handler but can write it within the HTML template statment</b><br>
+            <span ngNonBindable> &lt; button (click)="greeting2 = 'watupppp'" &gt; Greet  &lt;/ button  &gt; {{greeting2}} </span><br>
+            <button (click)="greeting2 = 'watupppp'" >Greet</button> {{greeting2}}<br><br>
+
+            <hr>
+            <h2>Template Reference Variables</h2>
+            Is the use of # &lt;element referance name&gt; to id an element and access its attributes
+            When there is a user interaction we want some data to flow from the view to the class to prefrom an operation<br>
+            ie we need a value from an input feild to preform a validation. To access DOM elements and their properties there are template ref variables<br>
+            In the input tags we give it a variable name using the hash symbol making it referanceable 
+            <br>
+            <span ngNonBindable> &lt; input #myInput type="text" &gt;&lt; button &gt; Log &lt;/ button (click)= "logMessage(myInput.value)"  &gt; {{greeting3}} </span>
+            <input #myInput type="text"> <button (click)= "logMessage(myInput.value)" >Log</button>{{greeting3}}<br>
+            <hr>
+            <h2>Two Way binding</h2>
+            Want to make sure that the model and view are synced <br>
+            ie say you have a form where you need to update your username and password your model or properties should automatically recive those values,<br>
+            also when there is an update in the model the view should automatically reflect the updated values. <br> 
+            Two way binding allows us to update the property and display of a value for that property <br>
+            <span ngNonBindable> &lt; input [(ngModel)]="nametwo" type="text" &gt; {{nametwo}}</span> <br>
+            <br>Here when we type something in the input box the property that is updated is the nametwo property<br>
+            <input id="textboxid" [(ngModel)]="nametwo" type="text"> {{nametwo}} <br>
+            <br> right now angular is not aware of the ngmodel directive bc it is in the forms module therefor we need to import that module (forms) in the app.module.ts file
+        </div>
+    </div>
+</div>

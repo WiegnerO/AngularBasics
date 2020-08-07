@@ -8,6 +8,13 @@ import { Component, OnInit } from '@angular/core';
 export class MakeAPipeComponent implements OnInit {
 
   hi = 'hello'
+  public pipeExample = "Hello World people"
+  public pipeNumberExample = 3.14159;
+  public date = new Date();
+  public person = {
+    "firstName" : "Ori",
+    "lastName"  : "Wiggy"
+  }
   constructor() { }
 
   ngOnInit(): void {
