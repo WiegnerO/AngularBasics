@@ -9,3 +9,8 @@ h1 {
 .dbltb{
     padding-left: 8em;
 }
+
+.container {
+    display: flex; 
+    justify-content: space-around
+}

@@ -1,0 +1,81 @@
+<h1>Services</h1>
+<br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-11">
+            Servces are responsible for sharing data across multiple components, wrtie logic that doesnt require a view, external interactions ie connect to a database
+
+            <br><br> <h3>Create a service </h3>
+            To create a service in the CLI write <b>ng g s &lt;name-of-service&gt;</b> and in the directory we have a folder &lt;name-of-service&gt;.service.ts
+           <br>Initally the serivce does not have and dependancies so this decorator does nothing but it might have depancies in the future therefore have it incase 
+            <br>The classes that use this service DO NOT have the @Injectable decorator because components have the @Component decorator includes the @Injectable decorator within it 
+            <br><br><h3>@Injectable </h3>
+            Is a decorator which lets the framework know that in the file this service/component might have injected dependancies (ie have a service injected in it)
+            <br>If in the @Injectable decorator it has the value providedIn: 'root' this means its a singleton class
+            <br>A singleton service is a service for which only one instance exists in an app
+            <br>You can make the service a singleton by setting the providedIn property of the @Injectable() to "root"
+            <br><br><h3>Register the service </h3>
+            We need to register the service with the angular injector or else it will be a regular class
+            <br>You have to choose where you register the service we can register it within the employee-list component , employee-detail component , app-compnent or app module
+            <br>It is best to register the service at the app module lvl bc then all the components of the module can access this service while if we do the app component lvl only is children can access it
+            <br>In the app.module.ts file include the service in the providers array and import it too
+            <br><br><h3>Injecting the Service </h3>
+            <br>When you inject the service in the constructor as a private parameter it is equvalent:
+            <div class="container">
+                <div>
+                    <h4>Syntaxtic sugar</h4>
+                    <br> constructor(private newService: NewService){{ '{' }}
+                    <br> {{ '}' }}
+                </div>
+                <div>  
+                    <h4>Equivalent</h4>
+                    <br>newService 
+                    <br>constructor(private newService: NewService){{ '{' }}
+                    <br><span class="tb">this.newService = NewService</span>
+                    <br>{{ '}' }}
+                </div>
+            </div>
+            <br><br>
+            <hr>
+            <h2 class="d-flex justify-content-center">How the code Looks</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>at-employee.services.ts</h3>
+                    import {{ '{' }} Injectable {{ '}' }} from '@angular/core'; <br>
+                    @Injectable({{ '{' }}<br>
+                    <span class="tb">providedIn: 'root'</span><br>
+                    {{ '}' }})<br><br>
+                    export class AtEmployeeService {{ '{' }}<br>
+                    <span class="tb">  getEmployees() {{ '{' }}</span><br>
+                    <span class="dbltb">return  Employees;</span><br>
+                    <span class="tb">{{ '}' }}</span><br>
+                    {{ '}' }}
+
+                </div>
+                <div class="col-md-4">  
+                    <h3>at-employee-list.component.ts</h3> 
+                    export class AtEmployeeListComponent implements OnInit {{ '{' }}<br>
+                    <span class="tb">employees:any[]</span><br>
+                    <span class="tb">constructor(private employeeService: AtEmployeeService){{ '{' }}{{ '}' }}</span><br>
+                    <span class="tb">gOnInit(): void {{ '{' }}</span><br>
+                    <span class="dbltb">this.employees</span>
+                    <span class="dbltb"></span><span class="dbltb"> = this.employeeService.getEmployees();</span><br>
+                    <span class="tb">{{ '}' }}</span><br>
+                    {{ '}' }}                  
+                </div>
+                <div class="col-md-4">  
+                    <h3>at-employee-list.component.html</h3> 
+                    &lt;ul *ngFor="let employee of employees"&gt;<br>
+                    <span class="tb">&lt;li&gt;{{ '{' }}{{ '{' }}employee.id{{ '}' }}{{ '}' }} {{ '{' }}{{ '{' }}employee.name{{ '}' }}{{ '}' }}&lt;/li&gt;</span><br>
+                    &lt;/ul&gt;              
+                </div>
+            </div>
+            <h4 class="d-flex justify-content-center">OutPut</h4>
+            <div class="d-flex justify-content-center">
+                <app-at-employee-list></app-at-employee-list>
+            </div>
+            
+        </div>
+    </div>
+</div>

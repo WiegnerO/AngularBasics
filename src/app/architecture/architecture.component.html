@@ -4,6 +4,37 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-1"></div>
+        <div class="col-md-11">
+            <h2>Execution flow</h2>
+            <h4>pakage.json</h4>
+            <div>
+                This file contain the dependancies which are the libraries that required for the angular packeage to work.
+                These pakages are installed within the node module folder
+            </div>
+            <h4>main.ts</h4>
+            <div>Is the entry point to the application</div>
+            <h4>app.module.ts</h4>
+            <div>
+                is the root module of the application
+            </div>
+            <h4>app.component.ts</h4>
+            <div>
+                is the root component of the application
+            </div>
+            <div>
+                When we run the ng serve command we go into the main.ts file and run the line : <br>
+                platformBrowserDynamic().bootstrapModule(AppModule) <br>
+                This line bootstraps the AppModule file app.module.ts which runs the line :<br>
+                bootstrap: [AppComponent] <br>
+                which will now bootstrap / start the AppComponent file app.component.ts which has 2 parts <br>
+                the HTML template <br>
+                the class which controls the veiw logic in a type script file
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-1"></div>
         <div class="col-md-5">
             <h2>Modules</h2>
             <p>
@@ -67,7 +98,7 @@
             <p>
                 Angular services are singleton objects that get instantiated only once during the lifetime of an application.<br>
                 Servces are responsible for sharing data across multiple components, wrtie logic that doesnt require a view, external interactions ie connect to a database<br>
-                You use services via Dependancy injections
+                You use services via Dependancy injections<br>
             </p>
         </div>
         <div class="col-md-1"></div>

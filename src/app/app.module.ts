@@ -9,9 +9,13 @@ import { ArchitectureComponent } from './architecture/architecture.component';
 import { InterpolationComponent } from './interpolation/interpolation.component';
 import { AtAppModuleComponent } from './at-app-module/at-app-module.component';
 import { MakeAPipeComponent } from './make-a-pipe/make-a-pipe.component';
-import { TextFormaterPipe } from './text-formater.pipe';
+import { TextFormaterPipe } from './make-a-pipe/text-formater.pipe';
 import { RoutingComponent } from './routing/routing.component';
 import { BindingComponent } from './binding/binding.component';
+import { AtServicesComponent } from './at-services/at-services.component';
+import { AtEmployeeService } from './at-services/at-employee.service';
+import { AtEmployeeListComponent } from './at-services/at-employee-list/at-employee-list.component';
+
 
 @NgModule({
   declarations: [
@@ -23,14 +27,16 @@ import { BindingComponent } from './binding/binding.component';
     MakeAPipeComponent,
     TextFormaterPipe,
     RoutingComponent,
-    BindingComponent
+    BindingComponent,
+    AtServicesComponent,
+    AtEmployeeListComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule
   ],
-  providers: [],
+  providers: [AtEmployeeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
