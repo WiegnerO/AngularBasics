@@ -7,6 +7,7 @@ import {  MakeAPipeComponent } from './make-a-pipe/make-a-pipe.component'
 import { RoutingComponent } from './routing/routing.component'
 import { BindingComponent } from './binding/binding.component'
 import { AtServicesComponent } from './at-services/at-services.component'
+import { AtStructuralDirectiveComponent } from './at-structural-directive/at-structural-directive.component'
 
 const routes: Routes = [
   {path : '', redirectTo : '/architecture', pathMatch : 'full'},
@@ -16,7 +17,8 @@ const routes: Routes = [
   {path : 'pipes' , component : MakeAPipeComponent},
   {path : 'routing' , component : RoutingComponent},
   {path : 'binding' , component : BindingComponent},
-  {path : 'services' , component : AtServicesComponent}
+  {path : 'services' , component : AtServicesComponent},
+  {path : 'structural directive' , component : AtStructuralDirectiveComponent}
 ];
 
 @NgModule({

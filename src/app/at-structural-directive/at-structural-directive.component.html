@@ -1,0 +1,116 @@
+<div class="text-center">
+    <h2>Structural Directives</h2>
+</div>
+<div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-11">
+        Structural directives are directives thta let you add or remove HTML elements from the dom
+        <br> there are 3 main types 
+        <ol>
+            <li>ngIf</li>
+            <li>ngSwitch</li>
+            <li>ngFor</li>
+        </ol>
+        <h2>*ngIF</h2>
+        ngIf and Ng ngSwitch are used for conditional statments while ngFor is used to list lists of elements <br>
+        <span ngNonBindable> &lt; a *ngIf="true" &gt;  Hi  &lt; /a &gt;</span> <a *ngIf="true">: Hi</a> <br>
+        <span ngNonBindable> &lt; a *ngIf="false" &gt;  Hi  &lt; /a &gt;</span> <a *ngIf="false">Hi</a>: Here the ngIf value is false therefore Hi wont be visable<br>
+        This element is removed from the DOM it is NOT the same as setting the css element to hide <br><br>
+        Setting a value is useless therefore the component can have a boolean attribute to toogle it on and off<br>
+        <span ngNonBindable> &lt; a *ngIf="displayNameTrue" &gt;  Hi  &lt; /a &gt;</span> <a *ngIf="displayNameTrue">: Hi</a> <br>
+        <span ngNonBindable> &lt; a *ngIf="displayNameFalse" &gt;  Hi  &lt; /a &gt;</span> <a *ngIf="displayNameFalse">Hi</a>: Here the ngIf value is displayNameFalse = false therefore Hi wont be visable<br>
+        <span ngNonBindable> &lt; h2 *ngIf="displayNameTrue ; else elseBlock" &gt;  Hi  &lt; /h2 &gt; <br><br></span>
+        <h3  class="text-center">If else </h3>
+        <div class="container">
+            <div>
+                <h6>*ngIf= true</h6>
+                &lt; b *ngIf="displayNameTrue ; else elseBlock" &gt;  Hi  &lt; b &gt; <br>
+                &lt;ng-template #elseBlock&gt;<br>
+                <span class="tb"> &lt;h2&gt;Bye&lt;/h2&gt;</span><br>
+                &lt;ng-template&gt;<br>
+                <b *ngIf="displayNameTrue; else elseBlock">Hi</b> 
+                <ng-template #elseBlock>    
+                    <b>Bye</b> 
+                </ng-template><br>
+            </div>
+            <div>
+                <h6>*ngIf= false</h6>
+                &lt; b *ngIf="displayNameTrue ; else elseBlock" &gt;  Hi  &lt; b &gt; <br>
+                &lt;ng-template #elseBlock&gt;<br>
+                <span class="tb"> &lt;h2&gt;Bye&lt;/h2&gt;</span><br>
+                &lt;ng-template&gt;<br>
+                <b *ngIf="displayNameFalse; else elseBlock">Hi</b> 
+                <ng-template #elseBlock>    
+                    <b>Bye</b> 
+                </ng-template>
+            </div>
+        </div>
+        <h3  class="text-center">If Then else </h3>
+        <div class="container">
+            <div>
+                <h6>*ngIf= true</h6>
+                <span ngNonBindable> &lt;*ngIf="displayNameTrue; then thenBlock ; else elseBlock2"&gt;<br>
+                    &lt;ng-template #thenBlock&gt;
+                    &lt;b&gt;Hello&lt;/b&gt;
+                    &lt;ng-template&gt;<br>
+                
+                    &lt;ng-template #elseBlock2&gt;
+                    &lt;b&gt;Good-bye&lt;/b&gt;
+                    &lt;ng-template&gt;</span><br>
+                    
+                    <div *ngIf="displayNameTrue; then thenBlock ; else elseBlock2"></div>
+                    <ng-template #thenBlock> <b>Hello</b></ng-template>
+                    <ng-template #elseBlock2> <b>Good-Bye</b> </ng-template>
+            </div>
+            <div>
+                <h6>*ngIf= false</h6>
+                <span ngNonBindable> &lt;*ngIf="displayNameFalse; then thenBlock ; else elseBlock2"&gt;<br>
+                    &lt;ng-template #thenBlock&gt;
+                    &lt;b&gt;Hello&lt;/b&gt;
+                    &lt;ng-template&gt;<br>
+                
+                    &lt;ng-template #elseBlock2&gt;
+                    &lt;b&gt;Good-bye&lt;/b&gt;
+                    &lt;ng-template&gt;</span><br>
+                    
+                    <div *ngIf="displayNameFalse; then thenBlock ; else elseBlock2"></div>
+                    <ng-template #thenBlock> <b>Hello</b></ng-template>
+                    <ng-template #elseBlock2> <b>Good-Bye</b> </ng-template>
+            </div>
+        </div>
+
+        <h2>ngSwitch</h2>
+        Good for when you want to compare amongst multiple values <br>
+        &lt;div [ngSwitch]="color"&gt; <br>
+        <span class="tb">&lt;div  class = "text-special" *ngSwitchCase="'red'"&gt;You picked red&lt;/div&gt;</span><br>
+        <span class="tb">&lt;div  class = "text-special" *ngSwitchCase="'blue'"&gt;You picked blue&lt;/div&gt;&lt;br&gt;</span><br>
+        <span class="tb">&lt;div  class = "text-special" *ngSwitchCase="'green'"&gt;You picked green&lt;/div&gt;&lt;br&gt;</span><br>
+        <span class="tb">&lt;div  *ngSwitchDefault &gt;You picked no matching color&lt;/div&gt;&lt;br&gt;</span><br>
+        &lt;/div&gt; <br><br>
+
+        <b>type in the box below</b><br>
+        <input type="text" [(ngModel)]="color"><br>
+        <div [ngSwitch]="color">
+            <div  class = "text-special" *ngSwitchCase="'red'"> You picked red </div>
+            <div *ngSwitchCase="'blue'"> You picked blue </div>
+            <div *ngSwitchCase="'green'"> You picked green </div>
+            <div *ngSwitchDefault> You picked no matching color</div>
+        </div>
+        <br>
+        <h2>ngFor</h2>
+        in the class we have an attribute called colors which is an array of strings<br>
+
+        <div class="container">
+            <div>
+                &lt;*ngFor="let color of colors; index as i ; first as f ; last as l ; odd as o ; even as e   &gt; <br>
+                <span ngNonBindable class="tb">{{f}} {{i+1}} {{color}} {{l}} {{o}} {{e}}</span> <br>
+                &lt;/div&gt; <br><br>
+            </div>
+            <div>
+                <div *ngFor="let color of colors; index as i ; first as f ; last as l ; odd as o ; even as e  ">
+                    {{f}} {{i+1}} {{color}} {{l}} {{o}} {{e}}<br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

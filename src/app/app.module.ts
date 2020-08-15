@@ -15,6 +15,7 @@ import { BindingComponent } from './binding/binding.component';
 import { AtServicesComponent } from './at-services/at-services.component';
 import { AtEmployeeService } from './at-services/at-employee.service';
 import { AtEmployeeListComponent } from './at-services/at-employee-list/at-employee-list.component';
+import { AtStructuralDirectiveComponent } from './at-structural-directive/at-structural-directive.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { AtEmployeeListComponent } from './at-services/at-employee-list/at-emplo
     RoutingComponent,
     BindingComponent,
     AtServicesComponent,
-    AtEmployeeListComponent
+    AtEmployeeListComponent,
+    AtStructuralDirectiveComponent
   ],
   imports: [
     BrowserModule,
