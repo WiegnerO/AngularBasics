@@ -1,0 +1,14 @@
+
+<div class="container">
+    <div *ngFor="let employee of employees">
+        <div *ngIf="id === employee.id">
+            {{employee.wage|currency}}
+        </div>
+        <employee-child #TRV
+                        [employeeInfo]=employee
+                        (eventClick)="seeWageParent($event)"
+                        [buttonFlag] = "id === employee.id"></employee-child>
+    <div>
+    <button class="btn btn-primary" (click)="TRV.incAge()">Template Ref var Inc employee age</button>
+</div>
+<br>

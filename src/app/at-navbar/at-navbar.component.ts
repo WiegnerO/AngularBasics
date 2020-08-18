@@ -15,9 +15,10 @@ export class AtNavbarComponent implements OnInit {
     this.navBarHeaders.push('architecture');
     this.navBarHeaders.push('interpolation');
     this.navBarHeaders.push('binding');
+    this.navBarHeaders.push('services');
+    this.navBarHeaders.push('component communication');
     this.navBarHeaders.push('observables');
     this.navBarHeaders.push('routing');
-    this.navBarHeaders.push('services');
     this.navBarHeaders.push('CLI');
     this.navBarHeaders.push('on push change detection');
     //https://www.youtube.com/watch?v=qklnVKgxMIY

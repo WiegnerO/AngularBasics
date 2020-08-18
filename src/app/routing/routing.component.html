@@ -15,28 +15,24 @@
         <li>
             After we need to configure the routes
             <br> in the <b>app-routing,module.ts</b> we have the line :
-            <br><b id="t1">const routes: Routes = [];</b>
-            <br> routes is a constant which is strognly typed as Routes from the router packages and this will define all the routes of the application and each route is nothing but an object which contians a path within the url and the component to be rendered when we navigate to the correpsonding path
-            <br> in this case we need to configure two routes in the application for : deparment-list and employee1-list
-            <br> <b id="t1">const routes: Routes = [
-                <br><b id="t2">path : 'departments' , component : DepartmentListComponent</b>
-                <br><b id="t2">path : 'emplayees', component : Employee1ListComponent </b>
-                <br><a id="t1">];</a></b>
-            <br> If we go to either paths we need to display thier respective components 
-            <br> Both app.module and app-routing.module will contian the same import statments
+            <br><b class="tb">const routes: Routes = [];</b>
+            <br> Routes is a constant which is strognly typed as Routes from the router packages and this will define all the routes of the application and each route is nothing but an object which contians a path within the url and the component to be rendered when we navigate to the correpsonding path
+            <br> <b class="tb">const routes: Routes = [
+                <br><b class="dbltb">{{ '{' }}path : '', redirectTo : '/architecture', pathMatch : 'full'{{ '}' }},</b>
+                <br><b class="dbltb">{{ '{' }}path : 'architecture' , component : ArchitectureComponent{{ '}' }},</b>
+                <br><b class="dbltb">{{ '{' }}path : 'employeeList' , component : employeeListComponent{{ '}' }}</b>
+                <br><b class="dbltb">{{ '{' }}path : 'employeeList/:id' , component : employeeDetailComponent{{ '}' }}</b>
+                <br><a class="dbltb">];</a></b>
+            <br> The first object represents the 'home' page when you go on <b>www.AngularBasics.com</b> where the path is empty go to the site it will redirect to the <b>www.AngularBasics.com/architecture</b> and display this architecture page (which is the second object)
+            <br> The third object represents a page in the application where if you go to <b>www.AngularBasics.com/employeeList</b> it will display the employeeListComponent
+            <br> The fourth object represents a page in the application where if you go to <b>www.AngularBasics.com/employeeList/:id</b> it will display the employeeDetailComponent of a specific employee
+            <br><span class="tb">The :id represents a placeholder parameter which will be passed into the component</span>
             <br> in the app-routing.module.ts you can make an array of all the routing components export it and then import it in the app.module
-            <br> <b id="t1"> export const routingComponents = [DepartmentListComponent , Employee1ListComponent]</b>
-            <br> In the app.module you can add to the routing module import statament and remove the other two statments
-            <br> <b id="t1">import ( AppRoutingModule , routingComponents ) from './app-routing.module';</b>
-            <br> <b id="t1">//import ( DepartmentListComponent ) from './department-list/department-list.component';</b>
-            <br> <b id="t1">//import ( Employee1ListComponent ) from './employee1-list/employee1-list.component';</b>
-            <br>
-            <br> <b id="t1">declarations: [</b>
-            <br> <b id ="t2">...</b>
-            <br> <b id ="t2">routingComponents</b>
-            <br> <b id ="t1">]</b>
             <br> The directive <b>router-outlet></b> which is avaible from the router prackage and marks where the router displays a view
-            <br> Now if you go to http://localhost:4200/departments it will display the DepartmentListComponent at yhe botom of the page
+            <br> In the app.component.html base html file it contains the tags: 
+            <br>  &lt;router-outlet&gt;&lt;/router-outlet&gt; which will display the coresponding component when a user requests a specific url
+            <br> In the index.html it contians the tags:
+            <br>  &lt;base href="/" &gt; which represents the base of the application and where the other tags are relative to
         </li>
     </ol>
 </div>

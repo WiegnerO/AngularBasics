@@ -1,0 +1,7 @@
+<div class="d-flex justify-content-center card card-body bg-light ">
+    <h2>name : {{employeeInfo.name}}</h2>
+    <div>id : {{employeeInfo.id}}</div>
+    <div>age : {{employeeInfo.age}}</div>
+    <button [hidden]="buttonFlag" class="btn btn-primary" (click)="seeWageChild()">Click Me! to see my wage</button>
+    <button [hidden]="!buttonFlag" class="btn btn-primary" (click)="seeWageChild()">Click Me! to unsee my wage</button>
+</div>

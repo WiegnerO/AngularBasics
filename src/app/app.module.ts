@@ -16,6 +16,9 @@ import { AtServicesComponent } from './at-services/at-services.component';
 import { AtEmployeeService } from './at-services/at-employee.service';
 import { AtEmployeeListComponent } from './at-services/at-employee-list/at-employee-list.component';
 import { AtStructuralDirectiveComponent } from './at-structural-directive/at-structural-directive.component';
+import { AtComponentCommunicationComponent } from './at-component-communication/at-component-communication.component';
+import { EmployeeParentComponent } from './at-component-communication/employee-parent/employee-parent.component';
+import { EmployeeChildComponent } from './at-component-communication/employee-child/employee-child.component';
 
 
 @NgModule({
@@ -31,7 +34,10 @@ import { AtStructuralDirectiveComponent } from './at-structural-directive/at-str
     BindingComponent,
     AtServicesComponent,
     AtEmployeeListComponent,
-    AtStructuralDirectiveComponent
+    AtStructuralDirectiveComponent,
+    AtComponentCommunicationComponent,
+    EmployeeParentComponent,
+    EmployeeChildComponent
   ],
   imports: [
     BrowserModule,

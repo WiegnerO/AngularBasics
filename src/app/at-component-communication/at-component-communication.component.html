@@ -1,0 +1,131 @@
+<div class="text-center">
+    <h2>Component Communication</h2>
+</div>
+<div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-11">
+        Component communicate with each other either by sending its own data to child OR child would want to send data to its parent<br>
+        To send between these components we use the @Output and @Input decorators. 
+        <li>@Input  : Parent ---> Child</li>
+        <li>@Output : Child  ---> Parent</li>
+        <h5>@Input</h5>
+        @Input is in the child class and will indicate that the associated value will be recived from the parent<br>
+        <span class="tb">@Input() public parentData;</span><br>
+        <span class="tb">It is also possible for the child component to rename the @input value : </span><br>
+        <span class="dbltb">@Input('parentData') public renamedParentData;</span><br>
+        <span ngNonBindable class="dbltb"> {{"hello " + parentData}} and {{"hello " + renamedParentData}} are the same </span>
+        <br><br>
+        <div class="row">
+            <div class="col-sm-5">
+                <h4>employee-parent.component.ts</h4>
+                export class EmployeeParentComponent implements OnInit {{ '{' }} <br>
+                <span class="tb"><a style="color: blue;">employees</a>:any[]</span><br>
+                <span class="tb">constructor(private employeeService: AtEmployeeService) {{ '{' }} {{ '}' }}</span><br>
+                <span class="tb">ngOnInit(): void {{ '{' }}</span><br>
+                <span class="dbltb">this.employees = this.employeeService.getEmployees();</span><br>
+                <span class="tb">{{ '}' }}</span><br>
+                {{ '}' }}
+            </div>
+            <div class="col-sm-5">
+                <h4>employee-child.component.ts</h4>
+                export class EmployeeChildComponent implements OnInit {{ '{' }} <br>
+                <span class="tb">@Input() <a style="color: red;">employeeInfo</a>:any;</span><br>
+                <span class="tb">constructor() {{ '{' }} {{ '}' }}</span><br>
+                <span class="tb">ngOnInit(): void {{ '{' }}</span><br>
+                <span class="tb">{{ '}' }}</span><br>
+                {{ '}' }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-5">
+                <h4>employee-parent.component.html</h4>
+                &lt;div class="container"&gt;<br>
+                <span class="tb">&lt;div *ngFor="let <a style="color: blue;">employee</a> of <a style="color: blue;">employees</a>"&gt;</span><br>
+                <span class="dbltb">&lt;employee-child [<a style="color: red;">employeeInfo</a>]=<a style="color: blue;">employee</a>&gt;&lt;/employee-child&gt;</span><br>
+                <span class="tb">&lt;div&gt;</span><br>
+                <span>&lt;div&gt;</span><br>
+            </div>
+            <div class="col-sm-5">
+                <h4>employee-child.component.html</h4>
+                &lt;div class="d-flex justify-content-center card card-body bg-light&gt;<br>
+                <span class="tb">&lt;h2&gt;name : {{ '{' }}{{ '{' }}employeeInfo.name{{ '}' }}{{ '}' }}&lt;/h2&gt;</span><br>
+                <span class="tb">&lt;div&gt;id : {{ '{' }}{{ '{' }}employeeInfo.id{{ '}' }}{{ '}' }}&lt;/div&gt;</span><br>
+                <span class="tb">&lt;div&gt;age : {{ '{' }}{{ '{' }}employeeInfo.age{{ '}' }}{{ '}' }}&lt;/div&gt;</span><br>
+                &lt;div&gt;
+            </div>
+        </div><br>
+        <h5>@Output</h5>
+        @Output is used in response to some event (ie onClick) that the child component does such that the parent can recive it<br>
+        <b>@Output() eventClick</b> This will configure the metadata necessary to tell Angular this property is to be treated as an output binding<br>
+        However, it needs to sit alongside something called the EventEmitter<br>
+        <b>EventEmitter</b> To be able to use our Output, we need to import and bind a new instance of the EventEmitter to it
+        <b>@Output() eventClick = new EventEmitter();</b> This will configure the metadata necessary to tell Angular this property is to be treated as an output binding<br>
+        To communicate with the parent we call eventClick.emit() to emit an event to the parent<br>
+        This will then emit a change to our (eventClick) listener we setup in the parent, to which our handleEventClicked($event) callback will be invoked, and the data associated with the event will be given to us via the $event property<br>
+        <br><br>
+        <div class="row">
+            <div class="col-sm-5">
+                <h4>employee-parent.component.ts</h4>
+                export class EmployeeParentComponent implements OnInit {{ '{' }} <br>
+                <span class="tb">employees:any[];</span><br>
+                <span class="tb"><a style="color:yellowgreen;">wage:</a> number;</span><br>
+                <span class="tb">constructor(private employeeService: AtEmployeeService) {{ '{' }} {{ '}' }}</span><br><br>
+                <span class="tb"><a style="color: hotpink;">seeWageParent</a>(<a style="color:cyan;">data</a>){{ '{' }}</span><br>
+                <span class="dbltb"><a style="color:yellowgreen;">this.wage</a> = <a style="color:cyan;">data;</a></span><br>
+                <span class="tb">{{ '}' }}</span><br><br>
+                <span class="tb">ngOnInit(): void {{ '{' }}</span><br>
+                <span class="dbltb">this.employees = this.employeeService.getEmployees();</span><br>
+                <span class="tb">{{ '}' }}</span><br>
+                {{ '}' }}
+            </div>
+            <div class="col-sm-5">
+                <h4>employee-child.component.ts</h4>
+                export class EmployeeChildComponent implements OnInit {{ '{' }} <br>
+                <span class="tb">@Input() employeeInfo:any;</span><br>
+                <span class="tb">@Output() eventClick = new EventEmitter();</span><br><br>
+                <span class="tb"><a style="color: blue;">seeWageChild()</a>{{ '{' }}</span><br>
+                <span class="dbltb">this.eventClick.emit(<a style="color:cyan;">this.employeeInfo.wage</a>);</span><br>
+                <span class="tb">{{ '}' }}</span><br><br>
+                <span class="tb"><a style="color:rosybrown;">incAge()</a>{{ '{' }} </span><br>
+                <span class="dbltb">this.employeeInfo.age ++;</span><br>
+                <span class="tb">{{ '}' }}</span><br><br>
+                <span class="tb">constructor() {{ '{' }} {{ '}' }}</span><br>
+                <span class="tb">ngOnInit(): void {{ '{' }}</span><br>
+                <span class="tb">{{ '}' }}</span><br>
+                {{ '}' }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-5">
+                <h4>employee-parent.component.html</h4>
+                &lt;div class="container"&gt;<br>
+                <span class="tb">&lt;div *ngFor="let employee of employees"&gt;</span><br>
+                <span class="dbltb">&lt;employee-child [employeeInfo]=employee<br>
+                    <span class="dbltb" style="color: orangered;">#TRV</span><br>
+                    <span class="dbltb">(<a style="color: blue;">eventClick</a>)="<a style="color: hotpink;">seeWageParent</a>(<a style="color: cyan;">$event</a>)"></span><br></span>
+                    <span class="dbltb">&lt;/employee-child&gt;</span><br>
+                <span class="tb">&lt;div&gt;</span><br>
+                <span class="dbltb">{{ '{' }}{{ '{' }}<a style="color: yellowgreen;">wage</a>{{ '}' }}{{ '}' }}</span><br>
+                <span class="tb">&lt;button class="btn btn-primary"</span><br>
+                <span class="dbltb"> (click)="<a style="color: orangered;">TRV</a>.<a style="color:rosybrown;">incAge()"</a>&gt;</span><br>
+                <span class="dbltb"> Ref var Inc employee age&lt;/button&gt;</span><br>
+                <span>&lt;div&gt;</span><br>
+            </div>
+            <div class="col-sm-5">
+                <h4>employee-child.component.html</h4>
+                &lt;div class="d-flex justify-content-center card card-body bg-light&gt;<br>
+                <span class="tb">&lt;h2&gt;name : {{ '{' }}{{ '{' }}employeeInfo.name{{ '}' }}{{ '}' }}&lt;/h2&gt;</span><br>
+                <span class="tb">&lt;div&gt;id : {{ '{' }}{{ '{' }}employeeInfo.id{{ '}' }}{{ '}' }}&lt;/div&gt;</span><br>
+                <span class="tb">&lt;div&gt;age : {{ '{' }}{{ '{' }}employeeInfo.age{{ '}' }}{{ '}' }}&lt;/div&gt;</span><br>
+                <span class="tb">&lt;button class="btn btn-primary" (click)="<a style="color: blue;">seeWageChild()</a>"&gt;Click Me! to see my wage&lt;/button&gt;</span><br>
+                &lt;div&gt;
+            </div>
+        </div><br><br>
+        <employee-parent></employee-parent>
+
+
+        
+
+
+    </div>
+</div>
