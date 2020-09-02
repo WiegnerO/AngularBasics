@@ -17,9 +17,9 @@ export class AtNavbarComponent implements OnInit {
     this.navBarHeaders.push('binding');
     this.navBarHeaders.push('services');
     this.navBarHeaders.push('component communication');
-    this.navBarHeaders.push('observables');
     this.navBarHeaders.push('routing');
-    this.navBarHeaders.push('CLI');
+    this.navBarHeaders.push('observables');
+    this.navBarHeaders.push('function');
     this.navBarHeaders.push('on push change detection');
     //https://www.youtube.com/watch?v=qklnVKgxMIY
     //https://netbasal.com/a-comprehensive-guide-to-angular-onpush-change-detection-strategy-5bac493074a4

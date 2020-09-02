@@ -16,9 +16,19 @@ import { AtServicesComponent } from './at-services/at-services.component';
 import { AtEmployeeService } from './at-services/at-employee.service';
 import { AtEmployeeListComponent } from './at-services/at-employee-list/at-employee-list.component';
 import { AtStructuralDirectiveComponent } from './at-structural-directive/at-structural-directive.component';
-import { AtComponentCommunicationComponent } from './at-component-communication/at-component-communication.component';
-import { EmployeeParentComponent } from './at-component-communication/employee-parent/employee-parent.component';
-import { EmployeeChildComponent } from './at-component-communication/employee-child/employee-child.component';
+import { EmployeeDetailComponent } from './routing/employee-detail/employee-detail.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
+import { EmployeeRouteActivatorService } from './routing/employee-route-activator.service'
+import {
+  AtComponentCommunicationComponent,
+  EmployeeParentComponent,
+  EmployeeChildComponent
+}from './at-component-communication/index';
+import { AtFunctionComponent } from './at-function/at-function.component'
+// import { AtComponentCommunicationComponent } from './at-component-communication/at-component-communication.component';
+// import { EmployeeParentComponent } from './at-component-communication/employee-parent/employee-parent.component';
+// import { EmployeeChildComponent } from './at-component-communication/employee-child/employee-child.component';
+
 
 
 @NgModule({
@@ -37,14 +47,17 @@ import { EmployeeChildComponent } from './at-component-communication/employee-ch
     AtStructuralDirectiveComponent,
     AtComponentCommunicationComponent,
     EmployeeParentComponent,
-    EmployeeChildComponent
+    EmployeeChildComponent,
+    EmployeeDetailComponent,
+    ErrorPageComponent,
+    AtFunctionComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule
   ],
-  providers: [AtEmployeeService],
+  providers: [AtEmployeeService , EmployeeRouteActivatorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

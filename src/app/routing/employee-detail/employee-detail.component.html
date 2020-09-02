@@ -1,0 +1,22 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="text-center">
+                <h2>  {{employee.name}}'s Page </h2>
+                <a>Employee id {{employee.id}}</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10 ">
+            <div class="text-center ">
+                <button class="btn btn-primary" (click)=getEmployeeBefore()>Employee Before {{employee.name}} </button>
+                <button class="btn btn-primary" [routerLink]="['/routing']" routerLinkActive="router-link-active" >Home Page</button>
+                <button class="btn btn-primary" (click)=getEmployeeAfter()>Employee After {{employee.name}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+

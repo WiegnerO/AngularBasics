@@ -10,7 +10,36 @@ h1 {
     padding-left: 8em;
 }
 
+.tpltb{
+    padding-left: 12em;
+}
+
 .container {
     display: flex; 
     justify-content: space-around;
+}
+
+.var1{
+    color: blue;
+    font-weight: bold;
+}
+
+.var2{
+    color: crimson;
+    font-weight: bold;
+}
+
+.var3{
+    color: darkmagenta;
+    font-weight: bold;
+}
+
+.var4{
+    color: green;
+    font-weight: bold;
+}
+
+.var5{
+    color: peru;
+    font-weight: bold;
 }

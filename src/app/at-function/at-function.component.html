@@ -1,0 +1,58 @@
+<h1>Functions</h1>
+<br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-11">
+            functions in JS are objects 
+            <br>So you can set properties on them 
+            <br><br>
+            <div class="container-fluid">
+                <h4>Lambda Functions</h4>
+                <div class="row">
+                    Fat arrow notations are used for anonymous functions i.e for function expressions
+                    <br>They are also called lambda functions in other languages
+                    <br>One of the major advantages of arrow functions is that it does not have it's own this value
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5>The typscript function</h5>
+                            <span class="tb">let <span class="var1">sum</span> = (<span class="var2">x: number, y: number</span>):<span class="var3">number</span> <span class="var4">=></span> {{ '{' }}</span>
+                            <br><span class="dbltb">return x + y;</span>
+                            <br><span class="tb">{{ '}' }}</span>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Can look like this bc function body is one line</h5>
+                            <span class="tb">let <span class="var1">sum</span> = (<span class="var2">x: number, y: number</span>):<span class="var3">number</span> <span class="var4">=></span>return x+y;</span>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>The converted JS function</h5>
+                            <span class="tb">var <span class="var1">sum</span> = (<span class="var2">x: number, y: number</span>):<span class="var3">number</span> {{ '{' }}</span>
+                            <br><span class="dbltb">return x + y;</span>
+                            <br><span class="tb">{{ '}' }}</span>
+                    </div>
+                </div>
+            </div>
+            <br><span class="var1">sum</span> is an arrow function
+            <br><span class="var2">x: number, y: number</span> denotes the parameter and their types
+            <br><span class="var3">number</span> specifies the return type
+            <br><span class="var4">=></span> separates the function parameters and the function body, where The right side of => can contain one or more code statements
+            <br>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            <h4>Self-Invoking Functions</h4>
+            A self-invoking expression is invoked (started) automatically, without being called
+            <br>Function expressions will execute automatically if the expression is followed by ()
+            <br>You have to add parentheses around the function to indicate that it is a function expression
+        </div>
+        <div class="col-md-5">
+            <br><span class="tb">(function () {{ '{' }}</span>
+            <br><span class="dbltb">var x = "Hello!!";  // I will invoke myself</span>
+            <br><span class="tb">{{ '}' }})();</span>
+        </div>
+    </div>
+</div>

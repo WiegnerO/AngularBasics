@@ -1,61 +1,308 @@
-<div class="text-center">
-    <h1>app-routing.module.ts File</h1>
+<div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-11"> 
+        <div class="text-center">
+            <h1>app-routing.module.ts File</h1>
+        </div>
+        <h2>Routing App</h2>
+        <div>
+            <ol>
+                <li>
+                    In the terminal (in the app folder) create the components you want to route to using the following CLI command :
+                    <br> ng g c &lt; Compnent name &gt; -it -is
+                    <br> g = genertae
+                    <br> c = component 
+                    <br> it = inline template
+                    <br> is = inline styles 
+                </li>
+                <li>
+                    After we need to configure the routes
+                    <br> in the <b>app-routing,module.ts</b> we have the line :
+                    <br><b class="tb">const routes: Routes = [];</b>
+                    <br> Routes is a constant which is strognly typed as Routes from the router packages and this will define all the routes of the application
+                    <br> each route is nothing but an object which contians a path within the url and the component to be rendered when we navigate to the correpsonding path
+                    <br> <b class="tb">const routes: Routes = [
+                        <br><b class="dbltb">1{{ '{' }}path : '', redirectTo : '/architecture', pathMatch : 'full'{{ '}' }},</b>
+                        <br><b class="dbltb">2{{ '{' }}path : 'architecture' , component : ArchitectureComponent{{ '}' }},</b>
+                        <br><b class="dbltb">3{{ '{' }}path : 'routing' , component : RoutingComponent{{ '}' }}</b>
+                        <br><b class="dbltb">4{{ '{' }}path : 'routing/:Eid' , component : EmployeeDetailComponent , canActivate : [EmployeeRouteActivatorService]{{ '}' }},</b>
+                        <br><b class="dbltb">5{{ '{' }}path : '404', component : ErrorPageComponent{{ '}' }}</b>
+                        <br><b class="dbltb">6{{ '{' }}'employee', loadChildren: () => import('./at-employee/at-employee.module').then(m => m.AtEmployeeModule){{ '}' }}</b>
+                        <br><b class="dbltb">{{ '{' }}path : '**', component : ErrorPageComponent{{ '}' }}</b>
+                        <br><a class="dbltb">];</a></b>
+                    <br> The first object represents the 'home' page when you go on <b>www.AngularBasics.com</b> where the path is empty go to the site it will redirect to the <b>www.AngularBasics.com/architecture</b> and display the architecture page
+                    <br> The third object represents a page in the application where if you go to <b>www.AngularBasics.com/employeeList</b> it will display the RoutingComponent
+                    <br> The fourth object represents a page in the application where if you go to <b>www.AngularBasics.com/employeeList/:Eid</b> it will display the employeeDetailComponent of a specific employee
+                    <br><span class="tb">The :Eid represents a placeholder parameter which will be passed into the component</span>
+                    <br><span class="tb">The canActivate is a safegaurd implemented incase a the user tries to go to an undesirable url in this case where the Eid does not exist such as <b>www.AngularBasics.com/employeeList/52</b></span>
+                    <br><span class="dbltb">The array consists of services which implements the canActivate method and if they all return true then the user can go to that specific url if not then it blocks the user from going to it</span>
+                    <br><span class="dbltb">In this case the EmployeeRouteActivatorService implements this canActivate method</span>
+                    <br> The fifth object represents a 404 page incase we go to a non existing file
+                    <br> The sixth object represents a lazy loaded module more evplianation below
+                    <br><span class="tb">the path is /employee for this route</span>
+                    <br><span class="tb">loadChildren is a dynamic function which imports from the routing module in the imports of ./at-employee/at-employee.module and then it loads the AtEmployeeModule</span>
+                    <br> The Seventh object is used to handle invalid URLs and will route it to the 404 ErrorPageComponent
+                    <br> in the app-routing.module.ts you can make an array of all the routing components export it and then import it in the app.module
+                    <br> The directive <b>router-outlet></b> which is avaible from the router prackage and marks where the router displays a view
+                    <br> In the app.component.html base html file it contains the tags: 
+                    <br>  &lt;router-outlet&gt;&lt;/router-outlet&gt; which will display the coresponding component when a user requests a specific url
+                    <br> In the index.html it contians the tags:
+                    <br>  &lt;base href="/" &gt; which represents the base of the application and where the other tags are relative to
+                </li>
+            </ol>
+        </div>
+
+<hr>
+        <div>
+            <h3>Route Steps</h3>
+            <ol>
+                <li>In index.html set the base the tag href to "/" <br> <b>&lt;base href="/&gt;</b> </li>
+                <li>In the app routing module configure the routes 
+                    <br> Each route has a path and a coresponding component
+                </li>
+                <li> Pass the routes variable as an argument in the forRoots method
+                    <br> <b id="tb">imports: [RouterModule.forRoot(routes)],</b> 
+                </li>
+                <li>in the app-routing file export the app routing modules in the routing components
+                    <br> <b id="tb">const routes: Routes = [
+                        <br><b id="dbltb">path : 'deparments' , component : DepartmentListComponent</b>
+                        <br><b id="dbltb">path : 'emplayees', component : Employee1ListComponent </b>
+                        <br><a id="tb">];</a></b>
+                </li>
+                <li>
+                    in the app.module file 
+                    <br> import the  routingComponents
+                    <br> add the  routingComponents in the delorations array 
+                </li>
+                <li>
+                    In the HTML file to activate the router use the routerLike directive and specify the route
+                    <br><b id="t1">routerLink="/department"</b>
+                </li>
+            </ol>
+            <hr>
+            <div>
+                <h3>Creating barrels</h3>
+                In each directory create an <b>index.ts</b> file <br>
+                within each index.ts file have an export statement for each component <br>
+                For example in the at-component-communication dir looks like<br>
+                <span class="tb"><b>at-component-communication</b>\at-component-communication.component</span><br>
+                <span class="dbltb">at-component-communication\<b>employee-parent</b>\employee-parent.component</span><br>
+                <span class="dbltb">at-component-communication\<b>employee-child</b>\employee-child.component</span><br>
+                In the employee-parent and employee-child folder there would have an index.ts file which would like like<br>
+                <span class="tb">at-component-communication\<b>employee-parent</b>\index.ts</span><br>
+                <span class="dbltb">export * from './employee-parent.component'</span><br>
+                <span class="tb">at-component-communication\<b>employee-child</b>\index.ts</span><br>
+                <span class="dbltb">export * from './employee-child.component'</span><br>
+                In the at-component-communication folder would also contian an index.ts file which would look like<br>
+                <span class="tb"><b>at-component-communication</b>\index.ts</span><br>
+                <span class="dbltb">export * from './<b>employee-child</b>/index.ts</span><br>
+                <span class="dbltb">export * from './<b>employee-parent</b>/index.ts</span><br>
+                <span class="dbltb">export * from './at-component-communication.component'</span><br>
+                Now that we have all these exports localized in the <b>at-component-communication</b>\index.ts file we can export that into the imports in the app.module.ts and routes.ts files<br>
+                
+                <div class="row">
+                    <div>
+                        <span class="tb"><b>app.module.ts</b></span><br>
+                        <span class="dbltb">import {{ '{' }}</span><br>
+                        <span class="tpltb">AtComponentCommunicationComponent,</span><br>
+                        <span class="tpltb">EmployeeParentComponent,</span><br>
+                        <span class="tpltb">EmployeeChildComponent</span><br>
+                        <span class="dbltb">{{ '}' }} from './at-component-communication/index' </span><br>
+                    </div>
+                    <div>
+                        <span class="tb"><b>routes.ts</b></span><br>
+                        <span class="dbltb">import {{ '{' }}</span><br>
+                        <span class="tpltb">AtComponentCommunicationComponent,</span><br>
+                        <span class="dbltb">{{ '}' }} from './at-component-communication/index' </span><br>
+                        (EmployeeParentComponent and EmployeeChildComponent do not have a routing but it would look the same as the app.module.ts if they did)
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div>
+                <h3>Lazy Loading modules</h3>
+                Lazy loading (also known as asynchronous loading) which defers initialization of an object until the point at which it is needed
+                <br>Useful so we dont instanciate it until it is used saving resources
+                <br>ng g module &lt;module name&gt; --route &lt;route module name&gt; --module &lt;update which module to lazy load it typically app-routing.module&gt;
+                <br>The new module directory looks like:<br>
+                <span class="tb">at-employee</span><br>
+                <span class="dbltb">at-employee-routing.module.ts</span><br>
+                <span class="dbltb">at-employee.component.ts</span><br>
+                <span class="dbltb">at-employee.component.html</span><br>
+                <span class="dbltb">at-employee.module.ts</span><br><br>
+                <div class="row">
+                    <div class="col-sm-5">
+                        <div>
+                            <div class="text-center">
+                                <h5>at-employee.module.ts</h5>
+                            </div>
+                            <div>
+                                import {{ '{' }} NgModule {{ '}' }} from '@angular/core';<br>
+                                import {{ '{' }} CommonModule {{ '}' }} from '@angular/common';<br>
+                                import {{ '{' }} <span class=" var2">AtEmployeeRoutingModule</span> {{ '}' }} from './at-employee-routing.module';<br>
+                                import {{ '{' }} <span class=" var1">AtEmployeeComponent</span> {{ '}' }} from './at-employee.component';<br>
+                                <br>
+                                @NgModule({{ '{' }} <br>
+                                    declarations: [<span class=" var1">AtEmployeeComponent</span>],<br>
+                                    imports: [ <br>
+                                    <span class="tb">CommonModule,</span><br>
+                                        <span class="tb var2">AtEmployeeRoutingModule</span><br>
+                                    ] {{ '}' }} )<br><br>
+                                  export class <span class="var4"> AtEmployeeModule</span>  {{ '{' }}  {{ ' }' }} <br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="text-center">
+                            <h5>at-employee-routing.module.ts</h5>
+                        </div>
+                        import {{ '{' }} NgModule {{ '}' }} from '@angular/core';<br>
+                        import {{ '{' }} Routes, RouterModule {{ '}' }} from from '@angular/router';<br>
+                        import {{ '{' }} <span class="var1"> AtEmployeeComponent</span> {{ '}' }} from ./at-employee.component';<br><br>
+                        const routes: Routes = [{{ '{' }} path: '', component:<span class="var1"> AtEmployeeComponent</span>  {{ '}' }}];
+                        <br><br>
+                                @NgModule({{ '{' }} <br>
+                                    imports: [ RouterModule.forChild(routes) ]<br>
+                                    exports: [RouterModule]<br>
+                                    {{ '}' }} )<br><br>
+                                  export class <span class=" var2">AtEmployeeRoutingModule</span> {{ '{' }}  {{ ' }' }} <br>
+
+                    </div>
+                </div>
+                
+                <br><a routerLink="/employee" routerLinkActive="router-link-active" >Wired module link click here</a>
+            </div>
+        </div>
+    </div>
 </div>
-<h2>Routing App</h2>
-<div>
-    <ol>
-        <li>
-            In the terminal (in the app folder) create the components you want to route to using the following CLI command :
-            <br> ng g c &lt; Compnent name &gt; -it -is
-            <br> g = genertae
-            <br> c = component 
-            <br> it = inline template
-            <br> is = inline styles 
-        </li>
-        <li>
-            After we need to configure the routes
-            <br> in the <b>app-routing,module.ts</b> we have the line :
-            <br><b class="tb">const routes: Routes = [];</b>
-            <br> Routes is a constant which is strognly typed as Routes from the router packages and this will define all the routes of the application and each route is nothing but an object which contians a path within the url and the component to be rendered when we navigate to the correpsonding path
-            <br> <b class="tb">const routes: Routes = [
-                <br><b class="dbltb">{{ '{' }}path : '', redirectTo : '/architecture', pathMatch : 'full'{{ '}' }},</b>
-                <br><b class="dbltb">{{ '{' }}path : 'architecture' , component : ArchitectureComponent{{ '}' }},</b>
-                <br><b class="dbltb">{{ '{' }}path : 'employeeList' , component : employeeListComponent{{ '}' }}</b>
-                <br><b class="dbltb">{{ '{' }}path : 'employeeList/:id' , component : employeeDetailComponent{{ '}' }}</b>
-                <br><a class="dbltb">];</a></b>
-            <br> The first object represents the 'home' page when you go on <b>www.AngularBasics.com</b> where the path is empty go to the site it will redirect to the <b>www.AngularBasics.com/architecture</b> and display this architecture page (which is the second object)
-            <br> The third object represents a page in the application where if you go to <b>www.AngularBasics.com/employeeList</b> it will display the employeeListComponent
-            <br> The fourth object represents a page in the application where if you go to <b>www.AngularBasics.com/employeeList/:id</b> it will display the employeeDetailComponent of a specific employee
-            <br><span class="tb">The :id represents a placeholder parameter which will be passed into the component</span>
-            <br> in the app-routing.module.ts you can make an array of all the routing components export it and then import it in the app.module
-            <br> The directive <b>router-outlet></b> which is avaible from the router prackage and marks where the router displays a view
-            <br> In the app.component.html base html file it contains the tags: 
-            <br>  &lt;router-outlet&gt;&lt;/router-outlet&gt; which will display the coresponding component when a user requests a specific url
-            <br> In the index.html it contians the tags:
-            <br>  &lt;base href="/" &gt; which represents the base of the application and where the other tags are relative to
-        </li>
-    </ol>
+
+<br>
+<div class="text-center">
+    <h2>Routing demo</h2>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="container">
+            <div *ngFor="let employee of employees">
+                <div class="d-flex justify-content-center card card-body bg-light ">
+                    <h2>name : {{employee.name}}</h2>
+                    <button class="btn btn-primary" routerLink="/routing/{{employee.id}}" routerLinkActive="active" >Click me to route to description page</button>
+                </div>
+            <div>
+        </div>
+    </div>
 </div>
 <br>
-<div class="d-flex justify-content-center">
-    <div>
-        import {{ '{' }} NgModule {{ '}' }} from '@angular/core';<br>
-        import {{ '{' }}  Routes, RouterModule {{ '}' }} from '@angular/router';<br>
-        import {{ '{' }}  ArchitectureComponent {{ '}' }} from './architecture/architecture.component'<br>
-        import {{ '{' }}  InterpolationComponent {{ '}' }} from './interpolation/interpolation.component'<br>
-        import {{ '{' }}  MakeAPipeComponent {{ '}' }} from './make-a-pipe/make-a-pipe.component'<br>
-        const routes: Routes = [<br>
-        <span class="tb">{{ '{' }}path : '', redirectTo : '/architecture', pathMatch : 'full'{{ '}' }},<br></span> 
-        <span class="tb">{{ '{' }}path : 'architecture' , component : ArchitectureComponent{{ '}' }}, <br></span>
-        <span class="tb">{{ '{' }}path : 'appmodule' , component : AtAppModuleComponent{{ '}' }}, <br></span>
-        <span class="tb">{{ '{' }}path : 'interpolation' , component : InterpolationComponent{{ '}' }},<br></span>
-        <span class="tb">{{ '{' }}path : 'pipes' , component : MakeAPipeComponent{{ '}' }}<br></span>
-        ];<br>
+
+<div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-4">
+        <div class="text-center">
+            <h2>app-routing.module.ts</h2>
+        </div>
+        
+            <div class="d-flex justify-content-center">
+                <div>
+                    import {{ '{' }} NgModule {{ '}' }} from '@angular/core';<br>
+                    import {{ '{' }}  Routes, RouterModule {{ '}' }} from '@angular/router';<br>
+                    import {{ '{' }}  ArchitectureComponent {{ '}' }} from './architecture/architecture.component'<br>
+                    import {{ '{' }}  InterpolationComponent {{ '}' }} from './interpolation/interpolation.component'<br>
+                    import {{ '{' }}  MakeAPipeComponent {{ '}' }} from './make-a-pipe/make-a-pipe.component'<br>
+                    const routes: Routes = [<br>
+                    <span class="tb">{{ '{' }}path : '', redirectTo : '/architecture', pathMatch : 'full'{{ '}' }},<br></span> 
+                    <span class="tb">{{ '{' }}path : 'architecture' , component : ArchitectureComponent{{ '}' }}, <br></span>
+                    <span class="tb">{{ '{' }}path : 'appmodule' , component : AtAppModuleComponent{{ '}' }}, <br></span>
+                    <span class="tb">{{ '{' }}path : 'interpolation' , component : InterpolationComponent{{ '}' }},<br></span>
+                    <span class="tb">{{ '{' }}path : 'routing' , component : RoutingComponent{{ '}' }},</span><br>
+                    <span class="tb">{{ '{' }}path : 'routing/:<span class="var1">Eid</span>' , component : EmployeeDetailComponent</span><br>
+                    <span class="tb"><span class="var4">canActivate</span> : [<span class="var5">EmployeeRouteActivatorService</span>]</span>{{ '}' }},<br>
+                    <span class="tb">{{ '{' }}path : 'pipes' , component : MakeAPipeComponent{{ '}' }}<br></span>
+                    <span class="tb">{{ '{' }}path : '<span class="var3">404'</span>, component : ErrorPageComponent{{ '}' }}</span><br>
+                    ];<br>
+                    <br>
+                    @NgModule({{ '{' }}<br>
+                    <span class="tb">imports: [RouterModule.forRoot(routes)],<br></span>
+                    <span class="tb">exports: [RouterModule]<br></span>
+                    {{ '}' }})<br>
+                    export class AppRoutingModule {{ '{' }} {{ '}' }}
+                </div>
+            </div>
+    </div>
+    <div class="col-sm-5">
+        <div class="text-center">
+            <h2>employee-detail.component.ts</h2>
+        </div>
+
+        import {{ '{' }} Component, OnInit {{ '}' }} from '@angular/core';<br>
+        import {{ '{' }} AtEmployeeService {{ '}' }} from '../../../app/at-services/at-employee.service';<br>
+        import {{ '{' }} ActivatedRoute {{ '}' }} from '@angular/router';<br>
         <br>
-        @NgModule({{ '{' }}<br>
-        <span class="tb">imports: [RouterModule.forRoot(routes)],<br></span>
-        <span class="tb">exports: [RouterModule]<br></span>
+        @Component({{ '{' }}<br>
+        <span class="tb">selector: 'app-employee-detail',</span><br>
+        <span class="tb">templateUrl: './employee-detail.component.html',</span><br>
+        <span class="tb">styleUrls: ['./employee-detail.component.css']</span><br>
         {{ '}' }})<br>
-        export class AppRoutingModule {{ '{' }} {{ '}' }}
+        export class EmployeeDetailComponent implements OnInit {{ '{' }}<br>
+        <span class="tb">employee:any;</span><br>
+        constructor(private employeeService: AtEmployeeService, private route:ActivatedRoute) {{ '{' }} {{ '}' }}<br><br>
+        ngOnInit(): void {{ '{' }}<br>
+        <span class="tb">this.<span class="var2">employee</span> = this.employeeService.getEmployee(+this.route.snapshot.params['<span class="var1">Eid</span>']);</span><br>
+        <span class="tb">{{ '}' }}</span><br>
+        {{ '}' }}
+
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-4">
+        <div class="text-center">
+            <h2>employee-route-activator.service.ts</h2>
+        </div>
+            <div class="d-flex justify-content-center">
+                <div>
+                    import {{ '{' }} Injectable {{ '}' }} from '@angular/core';<br>
+                    import {{ '{' }}  Router, <span class="var4">canActivate</span> , ActivatedRouteSnapshot {{ '}' }} from '@angular/router';<br>
+                    import {{ '{' }}  AtEmployeeService {{ '}' }} from '../at-services/at-employee.service';<br><br>
+                
+                    <span>@Injectable( {{ '{' }} providedIn: 'root'{{ '}' }})</span>
+                    <br><span>export class <span class="var5">EmployeeRouteActivatorService</span> implements <span class="var4">canActivate</span>{{ '{' }}</span>
+                    <br><span class="tb">constructor(private AES: AtEmployeeService, private router:Router ){{ '{' }}{{ '}' }},</span>
+                    <br><span class="tb"><span class="var4">canActivate</span>(route:ActivatedRouteSnapshot){{ '{' }}</span><br>
+                    <span class="dbltb"> const eventExist = </span> <br>
+                    <span class="tpltb">!!this.AES.getEmployee(+route.params['<span class="var1">Eid</span>']);</span><br>
+                    <span class="dbltb">if(!eventExist)</span><br>
+                    <span class="dbltb"><span class="tb"></span>this.router.navigate(['/<span class="var3">404'</span>']);<br></span>
+                    <span class="tb"><span class="tb"></span>return eventExist;</span><br>
+                    <span class="tb">{{ '}' }}</span><br>
+                    {{ '}' }}
+                    <br>
+                    <br>
+                </div>
+            </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="text-center">
+            <h2>routing.component.html</h2>
+        </div>
+        &lt;div *ngFor="let employee of employees" &gt;<br>
+        <span class="tb">&lt;div class="d-flex justify-content-center"&gt;</span><br>
+        <span class="dbltb">&lt;h2&gt;name : name : {{ '{' }}{{ '{' }}<span class="var2">employee</span>.name{{ '}' }}{{ '}' }}&lt;/h2&gt;</span><br>
+        <span class="dbltb">&lt;button routerLink="/routing/<span class="var1">{{ '{' }}{{ '{' }}</span><span class="var2">employee</span>.id<span class="var1">{{ '}' }}{{ '}' }}</span>"</span><br>
+        <span class="dbltb">routerLinkActive="active&gt;</span><br>
+        <span class="dbltb">click here</span><br>
+        <span class="dbltb">&lt;/button&gt;</span><br>
+                   
+        <span class="tb">&lt;/div&gt;</span><br>
+        &lt;/div&gt;
+    </div>
+
+    <div class="col-sm-3">
+        <div class="text-center">
+            <h2>employee-detail.component.html</h2>
+        </div>
+        &lt;div&gt;<br>
+        <span class="tb">name : {{ '{' }}{{ '{' }}<span class="var2">employee.</span>name{{ '}' }}{{ '}' }}</span><br>
+        &lt;/div&gt;<br>
     </div>
 </div>

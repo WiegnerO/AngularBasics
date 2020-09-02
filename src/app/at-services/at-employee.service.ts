@@ -12,7 +12,7 @@ export class AtEmployeeService {
   }
 
   getEmployee(id:number){
-    return Employees.filter(obj => { return obj.id === id})
+    return Employees.find(employee => employee.id === id)
   }
 }
 
