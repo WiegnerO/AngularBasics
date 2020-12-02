@@ -1,0 +1,166 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
+      <h4>npm install</h4>
+      <p>This will create in a <b>package.json</b> file</p>
+      <blockquote>
+          <pre>
+            <code>
+              {{ '{' }}
+                  "name": "angular-basics",
+                  "version": "0.0.0",
+                  "scripts":  {{ '{' }}
+                    "test": "ng test"
+                    {{ '}' }},
+                  "author" : "Ori Wiegner",
+                  "license": "hi"
+              {{ '}' }}
+            </code>
+          </pre>
+      </blockquote>
+
+      <h4>adding local pakages</h4>
+      <p>
+          This will be avaiable only for this specific application<br>
+          To add a dependancy :
+          <b>npm install (pakage_name)</b><br>
+          In this case we installed express<br>
+          <b>dev-dependancies</b> will not be incorporated in the final project bc they are used as dev tools so when you compile your production build<br>
+          these dependancies will NOT be incorporated
+          <b>npm install (pakage_name) --save-dev</b><br>
+      </p>
+      <blockquote>
+          <pre>
+            <code>
+              {{ '{' }}
+                  "name": "angular-basics",
+                  "version": "0.0.0",
+                  "scripts":  {{ '{' }}
+                    "test": "ng test"
+                    {{ '}' }},
+                  "author" : "Ori Wiegner",
+                  "license": "hi",
+                  "dependencies" : {{ '{' }} 
+                      "express": "^4.16.3"
+                  {{ '}' }},
+                  "devDependencies" : {{ '{' }} 
+                      "babel": "^6.26.0"
+                  {{ '}' }},
+              {{ '}' }}
+            </code>
+          </pre>
+        </blockquote>
+
+        <h4>install specific package version</h4>
+        <p>
+            To add an older version of a package is :<br>
+            <b>npm install (pakage_name)@(package_version)</b><br>
+            npm install eslint@5.2.0 -g <br>
+            To see if a package is outdate you type <br>
+            npm outdated or npm outdated -g
+        </p>
+        <blockquote>
+            <pre>
+              <code>
+                {{ '{' }}
+                    "name": "angular-basics",
+                    "version": "0.0.0",
+                    "scripts":  {{ '{' }}
+                      "test": "ng test"
+                      {{ '}' }},
+                    "author" : "Ori Wiegner",
+                    "license": "hi",
+                    "dependencies" : {{ '{' }} 
+                        "express": "^4.16.3",
+                        "eslint" : "^5.2.0"
+                    {{ '}' }},
+                    "devDependencies" : {{ '{' }} 
+                        "babel": "^6.26.0"
+                    {{ '}' }},
+                {{ '}' }}
+              </code>
+            </pre>
+          </blockquote>
+
+      <h4>update a package</h4>
+      <p>
+          to update a specific package type:<br>
+          <b> npm update (package_name) </b> or <b> npm install (package_name) </b>
+      </p>
+
+      <h4>remove a package</h4>
+      <p>
+          to remove a specific package type:<br>
+          <b> npm uninstall (package_name) </b> 
+      </p>
+
+      <h4>undertsanding version numbers</h4>
+      <p>
+          X.Y.Z <br>
+          X = major release <br>
+          Y = minor release <br>
+          Z = Patch release <br>
+          ^ = will only install that version but not higher ie 
+          ^2.3.6 then it will only get updated until 2.9.9 but never above 2 <br>
+          ~ = will only install patches only ie  ~2.3.6 then it will only get updated until 2.3.9 but never above 2.3
+      </p>
+
+      <h4>package-lock.json</h4>
+      <p>
+          This is used when multi ppl use this repo <br>
+          This ensures that when you run npm install it doesnt update to newer versions of the dependancies <br>
+          <b>package.json</b> -> "express" : "^4.15.4" <br>
+          run npm install <br> 
+          <b>package.json</b> -> "express" : "4.25.6"<br>
+          <b>package.json</b> -> "express" : "^4.15.4" <br>
+          <b>package-lock.json</b> -> "express" : "4.15.4" <br>
+          run npm install <br> 
+          <b>package.json</b> -> "express" : "4.15.4"<br>
+      </p>
+
+      <h4>npm cache</h4>
+      <p>
+        npm keeps a cache of your install modules so that it doesn't have to get them every time<br>
+        This can lead to unexpected results<br>
+        When you try to install the module or a version of a module that doesn't work, just try clearing your cache.<br>
+        Clearing your npm cache should always be part of your troubleshooting steps when working with modules<br>
+        <b>npm cache verify</b>
+        <b>npm cache clean --force</b>
+      </p>
+      <h4>npm aduit</h4>
+      <p>
+        checks to make sure if the module is safe to used
+      </p>
+      <h4>npm scripts</h4>
+      <p>
+        In the package.json file there is a scripts object here will run the npm scripts <br>
+        You can use default npm scripts such as test or make your own<br>
+        The key or left side values ie "test" is a script propety and on the value right side ie  "ng serve" is the value when you run the command<br>
+        If I type npm start it will run ng serve , if I do npm test it will run ng test and so on and so forth<br>
+        I can make my own script such as "orisnewcommand": "ng serve" where when I do npm orisnewcommand it will do ng serve
+      </p>
+        <blockquote>
+          <pre>
+            <code>
+              "scripts": 
+              {{ '{' }}
+                "ng": "ng",
+                "start": "ng serve",
+                "orisnewcommand": "ng serve"
+                "build": "ng build",
+                "test": "ng test",
+                "lint": "ng lint",
+                "e2e": "ng e2e"
+              {{ '}' }}
+            </code>
+          </pre>
+        </blockquote>
+      <h4>yarn</h4>
+      <p>
+        Its like npm but made by facebook
+      </p>
+
+      </div>
+  </div>
+</div>

@@ -1,7 +1,12 @@
+<div class="text-center">
+  <h2 *ngIf="auth.isAuthenticated()"[routerLink]="['Lazy Loaded Module/profile']" routerLinkActive="router-link-active" >Welcome {{auth.currentUser.Fname}}</h2>
+</div>
+  
   <nav class="navbar navbar-expand-md justify-content-center">
     <ul class="navbar-nav" *ngFor="let item of navBarHeaders">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/{{item}}" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">{{item | titlecase }}</a>
+        <a *ngIf="item !== 'fourm'" class="nav-link" routerLink="/{{item}}" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">{{item | titlecase }}</a>
+        <a *ngIf="item === 'fourm'" class="nav-link" routerLink="/Lazy Loaded Module/loggin" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">{{item | titlecase }}</a>
       </li>
     </ul>
   </nav>

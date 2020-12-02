@@ -1,15 +1,365 @@
-<h1>Functions</h1>
+<h1>JavaScript Basics</h1>
 <br>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-11">
-            functions in JS are objects 
-            <br>So you can set properties on them 
+            <h4>Vars in Js</h4>
+            <p>
+                Variables can be declared on any scope <br>
+                <b>let</b> and <b>var</b> allow you to redefine the same variable in different scopes
+            </p>
+            <div class="row">
+                <div class="col-md-5">
+                    <blockquote>
+                        <pre>
+                          <code>
+                            var <span class="var1">x</span> = 10     <span class="var2">// x = 10</span>
+                            {{ '{' }} let <span class="var3">x</span> = 5 {{ '}' }}  <span class="var2">// x = 5</span>
+                            console.log(<span class="var1">x</span>) <span class="var2">// x = 10</span>
+                          </code>
+                        </pre>
+                    </blockquote>
+                </div>
+                <div class="col-md-5">
+                    <blockquote>
+                        <pre>
+                          <code>
+                            var <span class="var1">x</span> = 10     <span class="var2">// x = 10</span>
+                            {{ '{' }} var <span class="var1">x</span> = 5 {{ '}' }}  <span class="var2">// x = 5</span>
+                            console.log(<span class="var1">x</span>) <span class="var2">// x = 5</span>
+                          </code>
+                        </pre>
+                    </blockquote>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-11">
+                    <h4>Lexical Environment</h4>
+                    <p>
+                        A lexical environment is a structure that holds identifier-variable mapping<br>
+                        Its another way of saying scope where each pair or curly braces is its own lexical enviroment / scope <br>
+                        Variables in a nested lexical enviroment are hoisted up
+                    </p>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <blockquote>
+                                <pre>
+                                    <code>
+                                        {{ '{' }} 
+                                            var x = 2;
+                                        {{ '}' }}
+                                    </code>
+                                </pre>
+                            </blockquote>
+                        </div>
+                        <div class="col-md-4">
+                            <blockquote>
+                                <pre>
+                                    <code>
+                                        var x;
+                                        {{ '{' }} 
+                                            var x = 2;
+                                        {{ '}' }}
+                                    </code>
+                                </pre>
+                            </blockquote>
+                        </div>
+                    </div>
+                    <b>Both are eqivalently the same ONLY THE DECLRATION travels up not the value</b> <br><br>
+                    For functions the lexical enviroment is created when it is used EXECUTED not when it is defined
+                    <div class="row">
+                        <div class="col-md-5">
+                            <blockquote>
+                                <pre>
+                                    <code>
+                                        function a (k,l,m) {{ '{' }} 
+                                            function b() {{ '{' }} {{ '}' }} 
+                                            function c() {{ '{' }} {{ '}' }} 
+                                        {{ '}' }}
+                                    </code>
+                                </pre>
+                                function b and c have its own lexical enviroment which is within function a<br>
+                            The values in the functions will not be hoisted (ie values of b wont be hoisted to a and values of a wont be hoisted to the global scope)
+                            </blockquote>
+                        </div>
+                        <div class="col-md-6">
+                            <blockquote>
+                                <pre>
+                                    <code>
+                                        for (var i = 0 ; i &lt; 3; i ++){{ '{' }} 
+                                            setTimeout(function()  {{ '{' }} 
+                                                console.log(i)
+                                            {{ '}' }}, 1000); 
+                                        {{ '}' }}
+                                    </code>
+                                </pre>
+                                This will print out 3 three times after 1 second<br>
+                                console.log(i) is operating within the setTimeout lexical enviroment not the for loop lexical enviroment<br>
+                                So the for loop will run and then once the setTimeout hits 1 second and then printed out the value of i after 3 seconds has passed <br>
+                                To solve this issue we need to do an IFFE on the setTimeout function
+                            </blockquote>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <blockquote>
+                                <pre>
+                                    <code>
+                                        for (var i = 0 ; i &lt; 3; i ++){{ '{' }} 
+                                                (function() {{ '{' }}setTimeout(function()  {{ '{' }} 
+                                                                j=i
+                                                                console.log(j)
+                                                                {{ '}' }}, 1000); 
+                                                            {{ '}' }}() 
+                                        {{ '}' }}
+                                    </code>
+                                </pre>
+                                Here is how to solve that in ES5
+                            </blockquote>
+                        </div>
+                        <div class="col-md-6">
+                            <blockquote>
+                                <pre>
+                                    <code>
+                                        for (let i = 0 ; i &lt; 3; i ++){{ '{' }} 
+                                            setTimeout(function()  {{ '{' }} 
+                                                console.log(i)
+                                            {{ '}' }}, 1000); 
+                                        {{ '}' }}
+                                    </code>
+                                </pre>
+                                Here is how to solve that in ES6<br>
+                                The let key word trickles down since the lexical en
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-11">
+                    <h4>Execution Context</h4>
+                    <p>
+                        In any Js file there is the golbal scope <br>
+                        The global scope behind the scences Js instanciates a window object :<br>
+                        <span class="tb">let window = new Window()</span><br>
+                        For every function call, the JavaScript engine creates a new Function Execution Context <br>
+                        So the global scope is an instance of the window object<br>
+                        The execution content only focuses:
+                        1) Scope (on the global scope and the function scope)
+                        2) Variable enviroment
+                        3) this binding (the this keyword dosnt always refer to the scope its in but the execution context)
+                    </p>
+                    <h4>The Call Stack</h4>
+                    <p>
+                        The Global scope is the first layer of the execution context<br>
+                        Inside a function the this is bound to context from which the function was called<br>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <blockquote>
+                        <pre>
+                            <code>
+                                function a(){{ '{' }} 
+                                    this.x = 1;
+                                {{ '}' }} 
+                                a();
+                                window.x;//1
+                            </code>
+                        </pre>
+                        The function was run within the global scope so the this object in the a function will be equal to the global scope object (window)<br>
+                        not best practice<br>
+                    </blockquote>
+                </div>
+                <div class="col-md-6"> 
+                    <blockquote>
+                        <pre>
+                            <code>
+                                this.a = 'global';
+                                var obj = {{ '{' }} 
+                                    a : 1;
+                                    method : function(){{ '{' }} 
+                                    console.log(this.a);
+                                    {{ '}' }} 
+                                {{ '}' }} 
+                                obj.method(); // 1
+                                var m = obj.method();
+                                m(); //global scope
+                            </code>
+                        </pre>
+                        We have an a property on the global scope and we also have an a property on the obj literal<br>
+                        When we call obj.method(); it outputs 1 since the method was called on the object scope not the global scope <br>
+                        When we call m(); it outputs 'global' since m was created in the global scope so the this context in the method function would refer to the global scope
+                    </blockquote>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-11">
+                    <h4>Hoisting</h4>
+                    <p>
+                        Before code is executed it is scanned for any function or variables <br>
+                        These functions and variable declarations are added to the Lexical Environment<br>
+                        <b>Lexical environment</b> is a data structure that holds identifier-variable mapping. 
+                        These variables and functions can be used before they are actually declared in the source code<br>
+                        JavaScript only hoist declarations, not initializations if you give a variable a value but use it before it was given it will return 'undefined'<br>
+                        The value is undefined because during the compile phase, it will add that variable to the lexical environment and initialize it with undefined but only assigns the value when it reaches that line<br>
+                        All declarations (function, var, let, const and class) are hoisted in JavaScript<br>
+                        <span class="tb"><b>var</b> declarations are initialized with undefined</span><br>
+                        <span class="tb"><b>let</b> and <b>const</b> declarations remain uninitialized</span><br>
+                        let and const are only initialized when their assignment (also known as lexical binding) which evaluated during runtime<br>
+                        It is legal to referance let and const variables in code above their declaration if that code is not executed before their declaration (ie Ex 4 the function is called after name was declared)
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>let</h5>
+                    <p>
+                        let variable are NOT hoisted <br>
+                    </p>
+                    <blockquote>
+                          <code>
+                            <b>Ex 1</b><br>
+                            console.log(a); // ReferenceError: a is not defined <br>
+                            let a = 3;<br><br>
+                            <hr>
+                            <b>Ex 2</b><br>
+                            let a;<br>
+                            console.log(a); // outputs undefined<br>
+                            a = 5;<br><br>
+                            <hr>
+                            <b>Ex 3</b><br>
+                            a = 5;<br>
+                            console.log(a); // outputs undefined<br>
+                            let a;<br><br>
+                            <hr>
+                            <b>Ex 4</b><br>
+                            function greetings() {{ '{' }} <br>
+                            <span class="tb">console.log(`Hello, ${{ '{' }}name{{ '}' }}`);</span><br>
+                            <span>{{ '}' }}</span><br>
+                            let name = "Hannah";<br>
+                            greetings(); // "Hello Hannah"<br><br>
+                            <hr>
+                            <b>Ex 5</b><br>
+                            function greetings() {{ '{' }} <br>
+                            <span class="tb">console.log(`Hello, ${{ '{' }}name{{ '}' }}`);</span><br>
+                            <span>{{ '}' }}</span><br>
+                            greetings(); // Uncaught ReferenceError: name is not defined<br>
+                            let name = "Hannah";<br>
+                          </code>
+                    </blockquote>
+                </div>
+                <div class="col-md-4">
+                    <h5>var</h5>
+                    <p>var variable are hoisted</p>
+                    <blockquote>
+                          <code>
+                            <b>Ex 1</b><br>
+                            console.log(a); // outputs 'undefined'<br>
+                            var a = 3;<br><br>
+                            <hr>
+                            <b>Ex 2</b><br>
+                            a = 5;<br>
+                            console.log(a); // 5<br>
+                            var a;
+                          </code>
+                    </blockquote>
+                </div>
+                <div class="col-md-4">
+                    <h5>const</h5>
+                    <p>const variables are NOT hoisted <br>
+                        <blockquote>
+                                <code>
+                                    <b>Ex 1</b><br>
+                                    const PI = 3.141592653589793;<br>
+                                    PI = 3.14;      // This will give an error<br>
+                                    PI = PI + 10;   // This will also give an error<br><br>
+                                    <hr>
+                                    <b>Ex 2</b><br>
+                                    var x = 10; // Here x is 10 <br>
+                                    {{ '{' }} <br>
+                                    const x = 2; // Here x is 2 <br>
+                                    {{ '}' }} <br>
+                                    consle.log(x)// Here x is 10 <br><br>
+                                    <hr>
+                                    <b>Ex 3</b><br>
+                                    const PI; <br>
+                                    PI = 3.14159265359; //Error<br><br>
+                                    <hr>
+                                    <b>Ex 4</b><br>
+                                    var x = 10;  // Allowed <br>
+                                    const x = 2; // Not allowed <br>
+                                    {{ '{' }} <br>
+                                    var x = 3; // Allowed <br>
+                                    const x = 5; // Not allowed <br>
+                                    {{ '}' }} <br>
+                                </code>
+                      </blockquote>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-11">
+                    <h4>Scopes</h4>
+                    <p>
+                        The types of scopes Global and Function<br>
+                        Global   :  variables and functions defined here are avaiable everywhere<br>
+                        Function/Local :  variables and functions defined here are only avaible in the function <br>
+                        Block scpoe : let and const variables, unlike var variables, they can be scoped to the nearest pair of curly braces so they can’t be accessed from outside that pair of curly braces<br>
+                        Nested scope : Scopes can be nested inside another scope (ie block inside a function inside a global)<br>
+                        Lexical Scope : Scope are variables defined outside a function can be accessible inside another function defined after the variable declaration
+
+                    </p>
+                    <h4>Scope Chaining</h4>
+                    <p>
+                        An invoked function has its own execution context which has:<br>
+                        Its own variable enviroment<br>
+                        Its own this variable<br>
+                        A referance to the outer enviroment<br>
+                        When a variable is used in JavaScript, the JavaScript engine will try to find the variable’s value in the current scope<br>
+                        If it could not find the variable, it will look into the outer scope and will continue to do so until it finds the variable or reaches global scope<br>
+                    </p>
+                    <blockquote>
+                        <pre>
+                          <code>
+                            var x = 2;
+                            A();
+                            function A() {{ '{' }}
+                                var x = 5;
+                                B(); //outputs 2 since B() value for x is 2 which is derived from the outer scope 
+                            {{ '}' }}
+                            function B() {{ '{' }}
+                                console.log(x); //outputs 2 since this function does not have an x value so it looks to its outer scope value for x
+                            {{ '}' }}
+                            <hr>
+                            var x = 2;
+                            A();
+                            function A() {{ '{' }}
+                                x = 5;
+                                B(); //outputs 5
+                            {{ '}' }}
+                            function B() {{ '{' }}
+                                console.log(x); //outputs 2 
+                            {{ '}' }}
+                          </code>
+                        </pre>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-11">
             <br><br>
             <div class="container-fluid">
                 <h4>Lambda Functions</h4>
-                <div class="row">
+                <div class="row">            
+                    functions in JS are objects 
+                    <br>So you can set properties on them 
                     Fat arrow notations are used for anonymous functions i.e for function expressions
                     <br>They are also called lambda functions in other languages
                     <br>One of the major advantages of arrow functions is that it does not have it's own this value
@@ -32,6 +382,17 @@
                             <br><span class="tb">{{ '}' }}</span>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        
+                    </div>
+                    <div class="col-md-4">
+                    
+                    </div>
+                    <div class="col-md-4">
+                       
+                    </div>
+                </div>
             </div>
             <br><span class="var1">sum</span> is an arrow function
             <br><span class="var2">x: number, y: number</span> denotes the parameter and their types
@@ -49,10 +410,10 @@
             <br>Function expressions will execute automatically if the expression is followed by ()
             <br>You have to add parentheses around the function to indicate that it is a function expression
         </div>
-        <div class="col-md-5">
-            <br><span class="tb">(function () {{ '{' }}</span>
-            <br><span class="dbltb">var x = "Hello!!";  // I will invoke myself</span>
-            <br><span class="tb">{{ '}' }})();</span>
-        </div>
+    </div>
+    <div class="col-md-5">
+        <br><span class="tb">(function () {{ '{' }}</span>
+        <br><span class="dbltb">var x = "Hello!!";  // I will invoke myself</span>
+        <br><span class="tb">{{ '}' }})();</span>
     </div>
 </div>

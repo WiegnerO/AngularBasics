@@ -1,0 +1,114 @@
+<div class="text-center">
+    <h2>Attribute Directives</h2>
+</div>
+<div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
+        <b>.ts file</b>
+        <ul>
+            <li>public hasError = true;</li>
+            <li>public hasNoError = false;</li>
+        </ul>
+
+        <b>CSS classes</b>
+        <ul>
+            <li>.text-success{{ '{' }} color: green; {{ '}' }}</li>
+            <li>.text-special{{ '{' }} font-style: italic; {{ '}' }}</li>
+            <li>.danger-class{{ '{' }} color: red; {{ '}' }}</li>
+        </ul>
+        ngClass is an example of attribute directive <br>
+        Its like Class binnding is binding of css classes to an element via binding<br>
+        &lt;span [ngClass]="{{ '{' }}cssClass: expression{{ '}' }}"&gt;This is style binding with ng class&lt;/span&gt; <br>
+        &lt;span [ngClass]="{{ '{' }}'text-success': true{{ '}' }}"&gt;This is style binding with ng class&lt;/span&gt;
+        <span [ngClass]="{'text-success': true}">This is style binding with ng classl</span><br>
+        &lt;span [ngClass]="{{ '{' }}'text-success': 'has-no-error'{{ '}' }}"&gt;This is style binding with ng class&lt;/span&gt;
+        <span [ngClass]="{'text-success': hasNoError}">This is style binding with ng class</span><br>
+        &lt;span [ngClass]="{{ '{' }}'text-success': 'has-no-error'{{ '}' }}"&gt;This is style binding with ng class&lt;/span&gt;
+        <span [ngClass]="{'text-success': hasNoError}">This is style binding with ng class</span><br>
+        &lt;span [ngClass]="{{ '{' }}'text-success': false , 'danger-class': true {{ '}' }}"&gt;This is style binding with ng class&lt;/span&gt;
+        <span [ngClass]="{'text-success': false , 'danger-class': true}">This is style binding with ng class</span><br><br>
+        <h3>Custom Directives</h3>
+        <p>
+            To create a directive you type in the terminal ng g d (directive_name) <br>
+            <b>ng g d at-fav-directive</b>
+        </p>
+        <h4>This is what the file looks like </h4>
+        <blockquote>
+            <pre>
+                <code>
+                    import {{ '{' }} Directive {{ '}' }} from '@angular/core';
+
+                    @Directive({{ '{' }}
+                        selector: '[appAtFavDirective]'
+                        {{ '}' }})
+                    export class AtFavDirectiveDirective {{ '{' }}
+
+                        constructor() {{ '{' }} }
+
+                        {{ '}' }}
+                </code>
+            </pre>
+        </blockquote>
+        <h4>Add the HostBinding directive in order to get the class applied to the host element that the directive is on</h4>
+        <blockquote>
+            <pre>
+                <code>
+                    import {{ '{' }} Directive , HostBinding {{ '}' }} from '@angular/core';
+
+                    @Directive({{ '{' }}
+                        selector: '[appAtFavDirective]'
+                        {{ '}' }})
+                    export class AtFavDirectiveDirective {{ '{' }}
+                        @HostBinding('class.text-special') isDanger = true;
+                        constructor() {{ '{' }} }
+
+                        {{ '}' }}
+                </code>
+            </pre>
+        </blockquote>
+
+        &lt;span appAtFavDirective&gt;This is style binding with the custom directive appAtFavDirective&lt;/span&gt;
+        <span appAtFavDirective>This is style binding with the custom directive appAtFavDirective</span><br> 
+        <h3>Add custom directive in the app.module meta data</h3>
+        <p>
+            you can import the directive in the app.module file and then put it in the declorations property so any class can use this directive<br>
+            Make sure to add it into the exports array too!
+        </p>
+        <h3>Custom directive can take in input values</h3>
+        <p>Custom directives can support input values from the host element</p>
+        <blockquote>
+            <pre>
+                <code>
+                    import {{ '{' }} Directive, ElementRef, HostListener, Input {{ '}' }} from '@angular/core';
+
+                    @Directive({{ '{' }}
+                        selector: '[appDynamicColor]'
+                        {{ '}' }})
+                    export class DynamicColorDirective {{ '{' }}
+                        @Input('appHighlight') highlightColor: string;
+                        @Input() defaultColor: string;
+                        @HostListener('mouseenter') onMouseEnter(){{ '{' }}
+                            this.highlight(this.highlightColor || this.defaultColor || 'red');
+                        {{ '}' }}
+                        @HostListener('mouseenter') onMouseLeave(){{ '{' }}
+                            this.highlight(null);
+                        {{ '}' }}
+                        private highlight(color: string){{ '{' }}
+                            this.el.nativeElement.style.backgroundColor = color;
+                        {{ '}' }}
+
+                        constructor(private el: ElementRef) {{ '{' }} }
+                    {{ '}' }}
+                </code>
+            </pre>
+        </blockquote>
+        <h5>Example 1</h5>
+        &lt;appDynamicColor appHighlight="green" defaultColor="violet"&gt;This is style binding with the custom directive DynamicColorDirective&lt;/span&gt;
+        <p appDynamicColor appHighlight="green" defaultColor="violet" > This is style binding with the custom directive DynamicColorDirective</p>
+        <h5>Example 2</h5>
+        <input type="radio" name="colors" (click)="color='lightgreen'">Green
+        <input type="radio" name="colors" (click)="color='yellow'">Yellow
+        <input type="radio" name="colors" (click)="color='cyan'">Cyan<br>
+        &lt;appDynamicColor appHighlight={{ '{' }}{{ '{' }}color{{ '}' }}{{ '}' }} defaultColor="violet"&gt;This is style binding with the custom directive and a component attribute DynamicColorDirective&lt;/span&gt;
+        <p appDynamicColor appHighlight={{color}} defaultColor="violet">This is style binding with the custom directive and a component attribute DynamicColorDirective using the input </p>
+    </div>

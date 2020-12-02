@@ -1,0 +1,86 @@
+<div class="text-center">
+    <h2>
+        How to set up the backend
+    </h2>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <p>
+                In the terminal type <b>npm init</b><br>
+                It will prompt you for intial set up options and then will create a package.json file<br>
+            </p>
+            <blockquote>
+                <pre>
+                    <b>package.json</b>
+                  <code>
+                    {{ '{' }}
+                        "name": "fireappbackend",
+                        "version": "0.0.0",
+                        "scripts":  {{ '{' }}
+                          "test": "echo \"Error: no test specified\" && exit 1"
+                          {{ '}' }},
+                        "author" : "Ori Wiegner",
+                        "license": "ISC"
+                    {{ '}' }}
+                  </code>
+                </pre>
+              </blockquote>
+              <p>
+                In the terminal type <b>npm install express --save</b><br>
+                This will install the express dependancies and put them in the package.json file<br>
+              </p>
+              <blockquote>
+                <pre>
+                    <b>package.json</b>
+                  <code>
+                    {{ '{' }}
+                        "name": "fireappbackend",
+                        "version": "0.0.0",
+                        "scripts":  {{ '{' }}
+                          "test": "echo \"Error: no test specified\" && exit 1"
+                          {{ '}' }},
+                        "author" : "Ori Wiegner",
+                        "license": "ISC"
+                        "dependencies":{{ '{' }}
+                            "express": "^4.17.1"
+                        {{ '}' }}
+                    {{ '}' }}
+                  </code>
+                </pre>
+              </blockquote>
+              <p>
+                In the terminal type <b>npm install -g nodemon</b><br>
+                This will detect if there are any changes to the server files and refresh the page automatically<br>
+                In the terminal to use nodemon type nodemon (server file name) <b>nodemon server.js</b>
+              </p>
+              <p>
+                Create a server file in the directory (it can be named anything) <b>server.js</b><br>
+                First we need to bring in the express framework and storing it in a constant <b>var express = require('express');</b><br>
+                Secondly we initialize the express framework and save it into another constant. <b>var app = express();</b><br>
+                Then we save the port of the server as a constant value, the process.env.PORT is going to check your environment variables to see if you already have a PORT defined there if not it will use PORT 4000.<b>const PORT = process.env.PORT || 4000</b><br>
+                There is a built in isten method and it expects the port number that our is located. You can pass a callback function as a second argument<br>
+                To start the server in the terminal type node (servername)<b>node server.js</b>
+              </p>
+              <blockquote>
+                <pre>
+                    <b>server.js</b>
+                  <code>
+                    var express = require('express');
+                    var app = express();
+                    const PORT = process.env.PORT || 4000
+
+                    app.get('/', (req,res)=>{{ '{' }}
+                        res.send('hello');
+                        {{ '}' }})
+
+                    app.listen(PORT, ()=>{{ '{' }}
+                        console.log('heyoo')
+                    {{ '}' }});
+                  </code>
+                </pre>
+              </blockquote>
+        </div>
+    </div>
+</div>

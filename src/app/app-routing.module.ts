@@ -16,6 +16,11 @@ import {
 }from './at-component-communication/index'
 // import { AtComponentCommunicationComponent } from './at-component-communication/at-component-communication.component'
 import { AtFunctionComponent } from './at-function/at-function.component'
+import { AtObservablesComponent } from './at-observables/at-observables.component'
+import { NpmComponent } from './npm/npm.component'
+import { AtAttributeDirectiveComponent } from './at-attribute-directive/at-attribute-directive.component'
+import { SettingUpBackEndComponent } from './setting-up-back-end/setting-up-back-end.component'
+import { AngularJSComponent } from './angular-js/angular-js.component'
 
 
 
@@ -30,9 +35,14 @@ const routes: Routes = [
   {path : 'services' , component : AtServicesComponent},
   {path : 'structural directive' , component : AtStructuralDirectiveComponent},
   {path : 'component communication' , component : AtComponentCommunicationComponent},
-  {path : 'function' , component : AtFunctionComponent},
+  {path : 'js' , component : AtFunctionComponent},
+  {path : 'attribute directive' , component : AtAttributeDirectiveComponent},
+  {path : 'npm' , component : NpmComponent},
   {path : 'routing/:Eid' , component : EmployeeDetailComponent, canActivate : [EmployeeRouteActivatorService]},
-  {path: 'employee', loadChildren: () => import('./at-employee/at-employee.module').then(m => m.AtEmployeeModule) },
+  {path : 'Lazy Loaded Module', loadChildren: () => import('./at-employee/at-employee.module').then(m => m.AtEmployeeModule) },
+  {path : 'back end', component : SettingUpBackEndComponent},
+  {path : 'observables' , component : AtObservablesComponent},
+  {path: 'angularJS' , component : AngularJSComponent},
   {path : '404', component : ErrorPageComponent },
   {path : "**" , component : ErrorPageComponent},
 ];

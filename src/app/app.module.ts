@@ -19,17 +19,23 @@ import { AtStructuralDirectiveComponent } from './at-structural-directive/at-str
 import { EmployeeDetailComponent } from './routing/employee-detail/employee-detail.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { EmployeeRouteActivatorService } from './routing/employee-route-activator.service'
+import { AtFunctionComponent } from './at-function/at-function.component';
+import { AtObservablesComponent } from './at-observables/at-observables.component';
 import {
   AtComponentCommunicationComponent,
   EmployeeParentComponent,
   EmployeeChildComponent
 }from './at-component-communication/index';
-import { AtFunctionComponent } from './at-function/at-function.component'
 // import { AtComponentCommunicationComponent } from './at-component-communication/at-component-communication.component';
 // import { EmployeeParentComponent } from './at-component-communication/employee-parent/employee-parent.component';
 // import { EmployeeChildComponent } from './at-component-communication/employee-child/employee-child.component';
-
-
+import { AuthService } from './at-employee/at-employee-data/auth.service';
+import { NpmComponent } from './npm/npm.component';
+import { AtAttributeDirectiveComponent } from './at-attribute-directive/at-attribute-directive.component';
+import { AtFavDirectiveDirective } from './at-attribute-directive/at-fav-directive.directive';
+import { DynamicColorDirective } from './at-attribute-directive/dynamic-color.directive';
+import { SettingUpBackEndComponent } from './setting-up-back-end/setting-up-back-end.component';
+import { AngularJSComponent } from './angular-js/angular-js.component';
 
 @NgModule({
   declarations: [
@@ -50,14 +56,23 @@ import { AtFunctionComponent } from './at-function/at-function.component'
     EmployeeChildComponent,
     EmployeeDetailComponent,
     ErrorPageComponent,
-    AtFunctionComponent
+    AtFunctionComponent,
+    AtObservablesComponent,
+    NpmComponent,
+    AtAttributeDirectiveComponent,
+    AtFavDirectiveDirective,
+    DynamicColorDirective,
+    SettingUpBackEndComponent,
+    AngularJSComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule
   ],
-  providers: [AtEmployeeService , EmployeeRouteActivatorService],
+  exports: [
+  ],
+  providers: [AtEmployeeService , EmployeeRouteActivatorService , AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

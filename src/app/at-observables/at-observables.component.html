@@ -1,0 +1,29 @@
+<h1>Reactive Programing</h1>
+<p>Is the creation of programns using operations and streams</p>
+<h1>Streams</h1>
+<p>
+    Streams are a sequence of values over time
+    <br>These values can be objects, primiative types
+</p>
+<h1>Observables</h1>
+    Are streams combined with Operations
+    <br>Is blueprint to describe a set of streams
+    <br>Currently in the APP we are serving the data which is hard coded into the employee service file but in IRL this hardcoded data is fetched from a web server
+    <br>To get these obj you use HTTP which brings back <b>OBSERVABLES</b> 
+    <br>The application runs on the browser and has 2 components (that use the employee service) employeeList and employeeDetail and make use of the emnployee service for thier data and right now this service provides hard coded data to the components
+    <br>We want is the data to be featched from the server Via HTTP get request
+    <br>This get request will interact with a web API or service which will fetch the data from a DB and fetch it back as an HTTP response
+    <br>The response we get back from the HTTP call is an <b>OBSEVABLE</b>
+    <br>The employe service needs to cast this observable into an array of employee which will return the same to the employee-list and employee-detail componetents
+    <br>  <b> EmpList && EmpDetail </b>--&gt; <b> EmpService </b> (GET) &lt;----&gt; (OBSERVABLE) <b>Http</b> (Request) &lt;----&gt; (Response) <b>DB</b>
+    <br> Steps of the chart
+    <ol>
+        <li>EmpList && EmpDetail components make use of the EmpService for thier data, EmpService will make an HTTP GET request</li>
+        <li>The GET request will hit an API or webserver</li>
+        <li>Data is fetched from a database</li>
+        <li>The data is sent back as an HTTP response </li>
+        <li>The Response recived from the Http response is an observable </li>
+        <li>EmpService needs to cast this observable into the specific type in this case an array of employes</li>
+        <li>This is then returned to the EmpList && EmpDetail components</li>
+    </ol>
+

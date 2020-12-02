@@ -1,1 +1,39 @@
-<p>at-employee works!</p>
+
+<div class="text-center">
+    <h2>Creating a Employee model</h2>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="container">
+            In the employee.model.ts file it contains the interface of the employee
+            <br>This interface is the class which contains the Data model of the IEmployee type
+            <br>This object type is used in the employee.serivce.ts file where the functions return of type IEmployee or an observable&lt;IEmployee[]>
+        </div>
+    </div>
+</div>
+<div class="text-center">
+    <h2 routerLink="./employee forum" routerLinkActive="active">Click here to add a new Employee</h2>
+</div>
+
+<div class="text-center">
+    <h2>Employees</h2>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="container">
+            <div *ngFor="let employee of employees">
+                <div class="d-flex justify-content-center card card-body bg-light ">
+                    <h2>Name : {{employee.name}}</h2>
+                    <h2>Id : {{employee.id}}</h2>
+                    <h2>Age : {{employee.age}}</h2>
+                    <h2>Wage : {{employee.wage}}</h2>
+                    <div *ngIf="employee.location">
+                        <h5>Location : {{employee.location?.adress}}</h5>
+                        <h5>Location : {{employee.location?.city}}</h5>
+                        <h5>Location : {{employee.location?.country}}</h5>
+                    </div>
+                </div>
+            <div>
+        </div>
+    </div>
+</div>

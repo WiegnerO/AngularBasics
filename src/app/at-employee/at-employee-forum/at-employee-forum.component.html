@@ -1,0 +1,48 @@
+<!-- Tamplate based forms-->
+<h1>New Employee</h1>
+<hr>
+<div class="col-md-6">
+  <form #newEmployeeForm="ngForm" (ngSubmit)="saveEmployee(newEmployeeForm.value)" autocomplete="off" novalidate>
+    <div class="form-group" [ngClass]="{'error': newEmployeeForm.controls.id?.invalid && newEmployeeForm.controls.id?.touched}">
+        <label for="EmployeeID">Employee ID:</label>
+        <em *ngIf="newEmployeeForm.controls.id?.invalid && (newEmployeeForm.controls.id?.touched)">Required</em>
+        <input (ngModel)="newEmployee.id" name="id" required id="EmployeeID" type="text" class="form-control" placeholder="Employee ID..." />
+    </div>
+
+    <div class="form-group" [ngClass]="{'error': newEmployeeForm.controls.name?.invalid && newEmployeeForm.controls.name?.touched}">
+      <label for="EmployeeName">Employee Name:</label>
+      <em *ngIf="newEmployeeForm.controls.name?.invalid && (newEmployeeForm.controls.name?.touched)">Required</em>
+      <input (ngModel)="newEmployee.name" name="name" required id="name" type="text" class="form-control" placeholder="Name of your Employee..." />
+    </div>
+    <div class="form-group" [ngClass]="{'error': newEmployeeForm.controls.age?.invalid && newEmployeeForm.controls.age?.touched}">
+      <label for="EmployeeAge">Employee age:</label>
+      <em *ngIf="newEmployeeForm.controls.age?.invalid && (newEmployeeForm.controls.age?.touched)">Required</em>
+      <input (ngModel)="newEmployee.age" name="age" required id="EmployeeAge" type="text" class="form-control" placeholder="Employee age..." />
+    </div>
+    <div class="form-group" [ngClass]="{'error': newEmployeeForm.controls.wage?.invalid && newEmployeeForm.controls.wage?.touched}">
+        <label for="EmployeeWage">Employee Wage:</label>
+        <em *ngIf="newEmployeeForm.controls.wage?.invalid && (newEmployeeForm.controls.wage?.touched)">Required</em>
+        <input (ngModel)="newEmployee.wage" name="wage" required id="EmployeeWage" type="text" class="form-control" placeholder="Employee Wage..." />
+    </div>
+
+    <!-- Location is its own Object therefore needs it own object within the Employee Object-->
+    <div ngModelGroup="location">
+        <div class="form-group">
+        <label for="address">Employee Location:</label>
+        <input (ngModel)="newEmployee.address" name="address" id="address" type="text" class="form-control" placeholder="Address of Employee..." />
+        </div>
+        <div class="row">
+        <div class="col-md-6">
+            <input (ngModel)="newEmployee.city" name="city" id="city" type="text" class="form-control" placeholder="City..." />
+        </div>
+        <div class="col-md-6" >
+            <input (ngModel)="newEmployee.country" name="country" id="country" type="text" class="form-control" placeholder="Country..." />
+        </div>
+        </div>
+    </div>
+
+    <br>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="button" [disabled]="!newEmployeeForm.invalid" class="btn btn-default" (click)="cancel()">Cancel</button>
+  </form>
+</div>

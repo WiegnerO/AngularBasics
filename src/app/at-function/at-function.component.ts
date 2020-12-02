@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AtFunctionComponent implements OnInit {
 
-
+  
   constructor() { }
 
   ngOnInit(): void {
@@ -40,7 +40,20 @@ export class AtFunctionComponent implements OnInit {
 
     Print = () => console.log("Hello TypeScript");
 
+    // function express when you assign a var an anynomys function 
 
-    
+    functaA = (a,b) => {a + b};
 
+    // reason for the fat arrow
+
+    name = "global";
+
+    obj = {
+      name : "obj",
+      sayLater : function(){
+        setTimeout(function(){
+          console.log(this.name);
+        }, 1000)
+      }
+    }
 }
